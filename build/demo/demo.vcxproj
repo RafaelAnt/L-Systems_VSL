@@ -1,0 +1,368 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{FCE8346D-C458-3012-9899-A09F365A902D}</ProjectGUID>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>demo</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\build\bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">demo.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">TreeL-Systems</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\build\bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">demo.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">TreeL-Systems</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\build\bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">demo.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">TreeL-Systems</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\build\bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">demo.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">TreeL-Systems</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\VSL\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\freeglut-3.0.0\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\devil;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\tinyxml;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\glew;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\include\vsl;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\contrib\tinyxml;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\contrib\glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;TIXML_USE_STL;FREEGLUT_STATIC;_CRT_SECURE_NO_WARNINGS;GLEW_BUILD;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;TIXML_USE_STL;FREEGLUT_STATIC;_CRT_SECURE_NO_WARNINGS;GLEW_BUILD;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\VSL\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\freeglut-3.0.0\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\devil;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\tinyxml;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\glew;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\include\vsl;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\contrib\tinyxml;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\contrib\glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\VSL\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\freeglut-3.0.0\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\devil;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\tinyxml;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\glew;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\include\vsl;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\contrib\tinyxml;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\contrib\glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;..\VSL\Debug\vsld.lib;..\contrib\tinyxml\Debug\tinyxmld.lib;..\contrib\freeglut-3.0.0\lib\Debug\freeglut_staticd.lib;..\contrib\assimp3.3.1\code\Debug\assimp-vc140-mt.lib;..\contrib\glew\Debug\glewd.lib;glu32.lib;opengl32.lib;..\..\contrib\devil\lib32\DevIL.lib;winmm.lib;..\contrib\assimp3.3.1\contrib\zlib\Debug\zlibstaticd.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>Debug</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/build/demo/Debug/demo.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/build/bin/demo.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version>
+      </Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\VSL\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\freeglut-3.0.0\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\devil;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\tinyxml;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\glew;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\include\vsl;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\contrib\tinyxml;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\contrib\glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;TIXML_USE_STL;FREEGLUT_STATIC;_CRT_SECURE_NO_WARNINGS;GLEW_BUILD;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;TIXML_USE_STL;FREEGLUT_STATIC;_CRT_SECURE_NO_WARNINGS;GLEW_BUILD;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\VSL\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\freeglut-3.0.0\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\devil;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\tinyxml;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\glew;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\include\vsl;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\contrib\tinyxml;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\contrib\glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\VSL\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\freeglut-3.0.0\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\devil;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\tinyxml;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\glew;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\include\vsl;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\contrib\tinyxml;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\contrib\glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;..\VSL\Release\vsl.lib;..\contrib\tinyxml\Release\tinyxml.lib;..\contrib\freeglut-3.0.0\lib\Release\freeglut_static.lib;..\contrib\assimp3.3.1\code\Release\assimp-vc140-mt.lib;..\contrib\glew\Release\glew.lib;glu32.lib;opengl32.lib;..\..\contrib\devil\lib32\DevIL.lib;winmm.lib;..\contrib\assimp3.3.1\contrib\zlib\Release\zlibstatic.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>No</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/build/demo/Release/demo.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/build/bin/demo.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version>
+      </Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\VSL\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\freeglut-3.0.0\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\devil;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\tinyxml;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\glew;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\include\vsl;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\contrib\tinyxml;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\contrib\glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;TIXML_USE_STL;FREEGLUT_STATIC;_CRT_SECURE_NO_WARNINGS;GLEW_BUILD;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;TIXML_USE_STL;FREEGLUT_STATIC;_CRT_SECURE_NO_WARNINGS;GLEW_BUILD;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\VSL\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\freeglut-3.0.0\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\devil;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\tinyxml;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\glew;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\include\vsl;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\contrib\tinyxml;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\contrib\glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\VSL\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\freeglut-3.0.0\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\devil;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\tinyxml;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\glew;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\include\vsl;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\contrib\tinyxml;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\contrib\glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;..\VSL\MinSizeRel\vsl.lib;..\contrib\tinyxml\MinSizeRel\tinyxml.lib;..\contrib\freeglut-3.0.0\lib\MinSizeRel\freeglut_static.lib;..\contrib\assimp3.3.1\code\MinSizeRel\assimp-vc140-mt.lib;..\contrib\glew\MinSizeRel\glew.lib;glu32.lib;opengl32.lib;..\..\contrib\devil\lib32\DevIL.lib;winmm.lib;..\contrib\assimp3.3.1\contrib\zlib\MinSizeRel\zlibstatic.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>No</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/build/demo/MinSizeRel/demo.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/build/bin/demo.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version>
+      </Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\VSL\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\freeglut-3.0.0\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\devil;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\tinyxml;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\glew;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\include\vsl;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\contrib\tinyxml;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\contrib\glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;TIXML_USE_STL;FREEGLUT_STATIC;_CRT_SECURE_NO_WARNINGS;GLEW_BUILD;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;TIXML_USE_STL;FREEGLUT_STATIC;_CRT_SECURE_NO_WARNINGS;GLEW_BUILD;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\VSL\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\freeglut-3.0.0\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\devil;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\tinyxml;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\glew;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\include\vsl;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\contrib\tinyxml;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\contrib\glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\VSL\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\freeglut-3.0.0\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\devil;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\tinyxml;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\glew;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\include\vsl;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\contrib\tinyxml;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\contrib\glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;..\VSL\RelWithDebInfo\vsl.lib;..\contrib\tinyxml\RelWithDebInfo\tinyxml.lib;..\contrib\freeglut-3.0.0\lib\RelWithDebInfo\freeglut_static.lib;..\contrib\assimp3.3.1\code\RelWithDebInfo\assimp-vc140-mt.lib;..\contrib\glew\RelWithDebInfo\glew.lib;glu32.lib;opengl32.lib;..\..\contrib\devil\lib32\DevIL.lib;winmm.lib;..\contrib\assimp3.3.1\contrib\zlib\RelWithDebInfo\zlibstatic.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>Debug</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/build/demo/RelWithDebInfo/demo.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/build/bin/demo.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version>
+      </Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/demo/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/Rafael/Documents/GitHub/L-Systems_VSL -BC:/Users/Rafael/Documents/GitHub/L-Systems_VSL/build --check-stamp-file C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\build\demo\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/demo/CMakeLists.txt;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\CMakeLists.txt;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\config.h.in;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\build\demo\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/demo/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/Rafael/Documents/GitHub/L-Systems_VSL -BC:/Users/Rafael/Documents/GitHub/L-Systems_VSL/build --check-stamp-file C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\build\demo\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/demo/CMakeLists.txt;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\CMakeLists.txt;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\config.h.in;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\build\demo\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/demo/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/Rafael/Documents/GitHub/L-Systems_VSL -BC:/Users/Rafael/Documents/GitHub/L-Systems_VSL/build --check-stamp-file C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\build\demo\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/demo/CMakeLists.txt;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\CMakeLists.txt;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\config.h.in;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\build\demo\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/demo/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/Rafael/Documents/GitHub/L-Systems_VSL -BC:/Users/Rafael/Documents/GitHub/L-Systems_VSL/build --check-stamp-file C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\build\demo\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/demo/CMakeLists.txt;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\CMakeLists.txt;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\config.h.in;C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\build\demo\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Bezier.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="Point.cpp" />
+    <ClCompile Include="ProductionRule.cpp" />
+    <ClCompile Include="Tree.cpp" />
+    <ClCompile Include="TreeNode.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/build/ZERO_CHECK.vcxproj">
+      <Project>BCAC8F3E-AE32-333F-A511-61DC8E7BC89C</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/build/contrib/assimp3.3.1/code/assimp.vcxproj">
+      <Project>02736E24-7604-32C2-8FD9-0C2A6D91F381</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/build/contrib/freeglut-3.0.0/freeglut_static.vcxproj">
+      <Project>A5BB9889-E25A-356E-BE79-D7F4289C4897</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/build/contrib/glew/glew.vcxproj">
+      <Project>77F5D364-F8B9-3519-9C5A-E6D67BFACC42</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/build/contrib/tinyxml/tinyxml.vcxproj">
+      <Project>D733350E-72D7-394B-85A6-F9B6E387F753</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/build/VSL/vsl.vcxproj">
+      <Project>F0030CAF-0B64-39CF-AEB7-BC71559479D7</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/build/contrib/assimp3.3.1/contrib/zlib/zlibstatic.vcxproj">
+      <Project>82FFAFD8-B321-356D-9713-8EFB4E598405</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Bezier.h" />
+    <ClInclude Include="Parser.h" />
+    <ClInclude Include="Point.h" />
+    <ClInclude Include="ProductionRule.h" />
+    <ClInclude Include="Tree.h" />
+    <ClInclude Include="TreeNode.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

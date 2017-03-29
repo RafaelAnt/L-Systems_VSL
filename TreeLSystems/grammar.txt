@@ -1,0 +1,35 @@
+% No BLANK Spaces Allowed!!!
+
+#AXIOM
+FX
+#DEGREES
+25
+#PRODUCTION
+F=FF-[-F+F]+[+F-F]
+X=FF+[+F]+[-F]
+#END
+
+% Others:
+
+
+#AXIOM
+F
+#DEGREES
+25
+#PRODUCTION
+F=F+F-[+F][-F]
+#END
+
+****
+Depois do #END não faz nada...
+
+
+Outro
+
+#AXIOM
+-F
+#DEGREES
+90
+#PRODUCTION
+F=F+F-F-F+F
+#END

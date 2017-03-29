@@ -1,36 +1,9 @@
-//
-// Lighthouse3D.com VS*L OpenGL Sample
-//
-// Loading and displaying a Textured Model
-//
-// Uses:
-//  Assimp 3.0 library for model loading
-//		http://assimp.sourceforge.net/
-//  Devil for image loading
-//		http://openil.sourceforge.net/
-//  GLEW for OpenGL post 1.1 functions
-//		http://glew.sourceforge.net/
-//	TinyXML for font definition parsing
-//		http://sourceforge.net/projects/tinyxml/
-//
-// This demo was built for learning purposes only.
-// Some code could be severely optimised, but I tried to
-// keep as simple and clear as possible.
-//
-// The code comes with no warranties, use it at your own risk.
-// You may use it, or parts of it, wherever you want.
-//
-// If you do use it I would love to hear about it. 
-// Just post a comment at Lighthouse3D.com
 
-// Have Fun :-)
-
-#include <math.h>
-#include <fstream>
-#include <map>
-#include <string>
+#include <iostream>
+#include <stdio.h>
+#include <Windows.h>
 #include <vector>
-
+#include <time.h>
 
 // include GLEW to access OpenGL 3.3 functions
 #include <GL/glew.h>
@@ -41,7 +14,17 @@
 // Use Very Simple Libs
 #include <vsl/vslibs.h>
 
+
+#include "Parser.h"
+#include "TreeNode.h"
+#include "Tree.h"
+
+
+#define PI 3.1415
+#define EXPANSIONS_NUMBER 3
 #define PATH_TO_FILES "C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/demo/../"
+#define PATH_TO_SOURCE "C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/build/demo/"
+
 
 VSMathLib *vsml;
 VSShaderLib program, programFonts;
@@ -63,23 +46,36 @@ unsigned int primitiveCounter = 0;
 
 // Camera Position
 float camX = 0, camY = 0, camZ = 5;
-
-// Mouse Tracking Variables
-int startX, startY, tracking = 0;
+float eyeX = 0;
+float eyeY = 0;
+float eyeZ = 0;
+float lookX = 0;
+float lookY = 0;
+float lookZ = 0;
+float dist = 30;
 
 // Camera Spherical Coordinates
 float alpha = 0.0f, beta = 0.0f;
 float r = 5.0f;
 
+// Mouse Tracking Variables
+int startX, startY, tracking = 0;
+
+
+
 
 //// Frame counting and FPS computation
-long myTime,timebase = 0,frame = 0;
+long myTime, timebase = 0, frame = 0;
 char s[32];
 
 float lightDir[4] = { 1.0f, 1.0f, 1.0f, 0.0f };
 
 
- 
+// TREE STUFF:
+float degree = 0;
+double lastTime = 0, elapsedTime = 0, lastElapsedTime = 0;
+string expanded;
+Tree plant;
 
 
 // ------------------------------------------------------------
@@ -92,11 +88,11 @@ void changeSize(int w, int h) {
 	float ratio;
 	// Prevent a divide by zero, when window is too short
 	// (you cant make a window of zero width).
-	if(h == 0)
+	if (h == 0)
 		h = 1;
 
 	// Set the viewport to be the entire window
-    glViewport(0, 0, w, h);
+	glViewport(0, 0, w, h);
 
 	ratio = (1.0f * w) / h;
 	vsml->loadIdentity(VSMathLib::PROJECTION);
@@ -119,14 +115,47 @@ void renderScene(void) {
 		vsml->loadIdentity(VSMathLib::VIEW);
 		vsml->loadIdentity(VSMathLib::MODEL);
 
+		glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
+
 		// set camera
-		vsml->lookAt(camX, camY, camZ, 0,0,0, 0,1,0);
+		vsml->lookAt(camX, camY, camZ, lookX, lookY, lookZ, 0, 1, 0);
 
 		float res[4];
 		vsml->multMatrixPoint(VSMathLib::VIEW, lightDir, res);
 		vsml->normalize(res);
 		program.setBlockUniform("Lights", "l_dir", res);
 
+
+		axis.set(5, 0.02f);
+		gridY.set(VSGrid::Y, 10, 200);
+		float redColor[3] = { 1,0,0 };
+		gridY.setColor(VSResourceLib::EMISSIVE, redColor );
+
+		/*glPushMatrix();
+		glBegin(GL_TRIANGLES);
+			glColor3f(0.5, 0.1, 0.5);
+			glNormal3f(0.0, 1.0, 0.0);
+			glVertex3f(-10, 0, -10);
+			glNormal3f(0.0, 1.0, 0.0);
+			glVertex3f(10, 0, 10);
+			glNormal3f(0.0, 1.0, 0.0);
+			glVertex3f(10, 0, -10);
+			glNormal3f(0.0, 1.0, 0.0);
+			glVertex3f(-10, 0, 10);
+			glNormal3f(0.0, 1.0, 0.0);
+			glVertex3f(10, 0, 10);
+			glNormal3f(0.0, 1.0, 0.0);
+			glVertex3f(-10, 0, -10);
+		glEnd();
+		glPopMatrix();*/
+
+		// Tree
+		int result;
+		result = plant.draw();
+		if (result != TREE_DONE && result != TREE_NOT_ENOUGH_POINTS_FOR_CATMULLROM) {
+			printf("Fatal Error: %d\n", result);
+			exit(0);
+		}
 
 		{
 			PROFILE_GL("Render models");
@@ -136,8 +165,8 @@ void renderScene(void) {
 			// start counting primitives
 			glBeginQuery(GL_PRIMITIVES_GENERATED, counterQ);
 			// render array of models
-			for (float x = -2.0f ; x < 3.0f ; x += 2.0f) {
-				for (float z = -2.0f; z < 3.0f ; z += 2.0f) {
+			for (float x = -2.0f; x < 3.0f; x += 2.0f) {
+				for (float z = -2.0f; z < 3.0f; z += 2.0f) {
 					vsml->pushMatrix(VSMathLib::MODEL);
 					vsml->translate(VSMathLib::MODEL, x, 0.0f, z);
 					myModel.render();
@@ -153,14 +182,14 @@ void renderScene(void) {
 
 		// FPS computation and display
 		frame++;
-		myTime=glutGet(GLUT_ELAPSED_TIME);
+		myTime = glutGet(GLUT_ELAPSED_TIME);
 		if (myTime - timebase > 1000) {
-				sprintf(s,"FPS:%4.2f  Triangles: %d",
-					frame*1000.0/(myTime-timebase) , primitiveCounter);
+			sprintf(s, "FPS:%4.2f  Triangles: %d",
+				frame*1000.0 / (myTime - timebase), primitiveCounter);
 			timebase = myTime;
 			frame = 0;
 #if (__VSL_FONT_LOADING__ == 1)
-			vsfl.prepareSentence(aSentence,s);
+			vsfl.prepareSentence(aSentence, s);
 #endif
 		}
 
@@ -175,12 +204,12 @@ void renderScene(void) {
 			vsfl.prepareSentence(profileSentence, s);
 			//set the shader for rendering the sentence
 			// render sentences
-			vsfl.renderSentence(10,10,aSentence);
+			vsfl.renderSentence(10, 10, aSentence);
 			vsfl.renderSentence(10, 30, profileSentence);
 
 		}
 #endif
-		 //swap buffers
+		//swap buffers
 		{
 			PROFILE("Swap");
 			glutSwapBuffers();
@@ -193,45 +222,90 @@ void renderScene(void) {
 	}
 }
 
+// ------------------------------------------------------------
+//
+// Idle Function
+//
+
+void animate() {
+
+	if (lastTime == 0) lastTime = timeGetTime();
+	elapsedTime = timeGetTime() - lastTime;
+
+	int r = plant.animate(elapsedTime);
+
+	if (r != TREE_DONE && r != TREE_NOT_ENOUGH_POINTS_FOR_CATMULLROM) {
+		printf("Fatal Error: %d\n", r);
+		exit(0);
+	}
+
+	glutPostRedisplay();
+
+}
+
 
 // ------------------------------------------------------------
 //
 // Events from the Keyboard
 //
 
-void processKeys(unsigned char key, int xx, int yy)
-{
-	switch(key) {
+void processKeys(unsigned char key, int xx, int yy){
+	std::string stringAux;
 
-		case 27:
+	switch (key) {
+	case 'q':
+		printf("\nThe End!\n");
+		glutLeaveMainLoop();
+		break;
+	case 'w': r -= 0.1f;
+		camX = r * sin(alpha * 3.14f / 180.0f) * cos(beta * 3.14f / 180.0f);
+		camZ = r * cos(alpha * 3.14f / 180.0f) * cos(beta * 3.14f / 180.0f);
+		camY = r *   						     sin(beta * 3.14f / 180.0f);
+		break;
+	case 's': r += 0.1f;
+		camX = r * sin(alpha * 3.14f / 180.0f) * cos(beta * 3.14f / 180.0f);
+		camZ = r * cos(alpha * 3.14f / 180.0f) * cos(beta * 3.14f / 180.0f);
+		camY = r *   						     sin(beta * 3.14f / 180.0f);
+		break;
+	case 'm':
+		glEnable(GL_MULTISAMPLE);
+		break;
+	case 'n': 
+		glDisable(GL_MULTISAMPLE); 
+		break;
+	case 'k': 
+		VSProfileLib::Reset(); 
+		break;
+	case 'p': 
+		stringAux = VSProfileLib::DumpLevels();
+		printf("%s\n", stringAux.c_str());
+		break;
+	case '+':
+		lookY += 1;
+		break;
 
-			glutLeaveMainLoop();
-			break;
+	case '-':
+		lookY -= 1;
+		break;
+	case 'r':
+		printf("Restarting Animation...\n");
+		plant.reset();
+		break;
 
-		case 'z': r -= 0.1f;
-				camX = r * sin(alpha * 3.14f / 180.0f) * cos(beta * 3.14f / 180.0f);
-				camZ = r * cos(alpha * 3.14f / 180.0f) * cos(beta * 3.14f / 180.0f);
-				camY = r *   						     sin(beta * 3.14f / 180.0f);
-				break;
-		case 'x': r += 0.1f;
-				camX = r * sin(alpha * 3.14f / 180.0f) * cos(beta * 3.14f / 180.0f);
-				camZ = r * cos(alpha * 3.14f / 180.0f) * cos(beta * 3.14f / 180.0f);
-				camY = r *   						     sin(beta * 3.14f / 180.0f);
-				break;
-		case 'm': glEnable(GL_MULTISAMPLE); break;
-		case 'n': glDisable(GL_MULTISAMPLE); break;
-		case 'k': VSProfileLib::Reset(); break;
-		case 'p': std::string s = VSProfileLib::DumpLevels();
-				printf("%s\n", s.c_str());
-				break;
+	case'g':
+		printf("Increasing growth...\n");
+		plant.reset();
+		plant.grow(1);
+		printf("New L-System:\n%s\n\n", plant.getLSystem().data());
+		break;
 
 	}
 	camX = r * sin(alpha * 3.14f / 180.0f) * cos(beta * 3.14f / 180.0f);
 	camZ = r * cos(alpha * 3.14f / 180.0f) * cos(beta * 3.14f / 180.0f);
 	camY = r *   						     sin(beta * 3.14f / 180.0f);
 
-//  uncomment this if not using an idle func
-//	glutPostRedisplay();
+	//  uncomment this if not using an idle func
+	//glutPostRedisplay();
 }
 
 
@@ -240,10 +314,9 @@ void processKeys(unsigned char key, int xx, int yy)
 // Mouse Events
 //
 
-void processMouseButtons(int button, int state, int xx, int yy)
-{
+void processMouseButtons(int button, int state, int xx, int yy){
 	// start tracking the mouse
-	if (state == GLUT_DOWN)  {
+	if (state == GLUT_DOWN) {
 		startX = xx;
 		startY = yy;
 		if (button == GLUT_LEFT_BUTTON)
@@ -266,15 +339,13 @@ void processMouseButtons(int button, int state, int xx, int yy)
 }
 
 // Track mouse motion while buttons are pressed
-void processMouseMotion(int xx, int yy)
-{
-
+void processMouseMotion(int xx, int yy){
 	int deltaX, deltaY;
 	float alphaAux, betaAux;
 	float rAux;
 
-	deltaX =  - xx + startX;
-	deltaY =    yy - startY;
+	deltaX = -xx + startX;
+	deltaY = yy - startY;
 
 	// left mouse button: move camera
 	if (tracking == 1) {
@@ -307,8 +378,8 @@ void processMouseMotion(int xx, int yy)
 	}
 
 
-//  uncomment this if not using an idle func
-//	glutPostRedisplay();
+	//  uncomment this if not using an idle func
+	//	glutPostRedisplay();
 }
 
 
@@ -319,8 +390,8 @@ void mouseWheel(int wheel, int direction, int x, int y) {
 	camZ = r * cos(alpha * 3.14f / 180.0f) * cos(beta * 3.14f / 180.0f);
 	camY = r *   						     sin(beta * 3.14f / 180.0f);
 
-//  uncomment this if not using an idle func
-//	glutPostRedisplay();
+	//  uncomment this if not using an idle func
+	//	glutPostRedisplay();
 }
 
 
@@ -339,7 +410,7 @@ GLuint setupShaders() {
 	programFonts.loadShader(VSShaderLib::FRAGMENT_SHADER, path + "shaders/color.frag");
 
 	// set semantics for the shader variables
-	programFonts.setProgramOutput(0,"outputF");
+	programFonts.setProgramOutput(0, "outputF");
 	programFonts.setVertexAttribName(VSShaderLib::VERTEX_COORD_ATTRIB, "position");
 	programFonts.setVertexAttribName(VSShaderLib::TEXTURE_COORD_ATTRIB, "texCoord");
 
@@ -384,18 +455,16 @@ GLuint setupShaders() {
 //
 
 
-int init()
-{
+int init(){
 	// load models
 	std::string modelFile = PATH_TO_FILES;
 	modelFile += "models/fonte-finallambert.dae";
 	if (myModel.load(modelFile)) {
 
-		printf("%s\n",myModel.getInfo().c_str());
-
+		printf("%s\n", myModel.getInfo().c_str());
 
 		axis.set(5, 0.02f);
-		
+
 		gridY.set(VSGrid::Y, 5, 25);
 		// some GL settings
 		glEnable(GL_DEPTH_TEST);
@@ -405,12 +474,12 @@ int init()
 		glClearColor(0.75f, 0.75f, 0.75f, 0.75f);
 		glClearColor(0.25f, 0.25f, 0.25f, 0.25f);
 		// generate a query to count primitives
-		glGenQueries(1,&counterQ);
+		glGenQueries(1, &counterQ);
 
 		return true;
 	}
 	else {
-		printf("%s\n",myModel.getErrors().c_str());
+		printf("%s\n", myModel.getErrors().c_str());
 		return false;
 	}
 }
@@ -423,7 +492,7 @@ void initVSL() {
 
 	// Init VSML
 	vsml = VSMathLib::getInstance();
-	vsml->setUniformBlockName("Matrices");	
+	vsml->setUniformBlockName("Matrices");
 	vsml->setUniformName(VSMathLib::PROJ_VIEW_MODEL, "m_pvm");
 	vsml->setUniformName(VSMathLib::NORMAL, "m_normal");
 	vsml->setUniformName(VSMathLib::VIEW_MODEL, "m_viewModel");
@@ -443,41 +512,43 @@ void initVSL() {
 
 // ------------------------------------------------------------
 //
-// Main function
+//  Init Glut Function
 //
 
 
-/*int main(int argc, char **argv) {
+void glutMain(int argc, char** argv) {
 
-//  GLUT initialization
+	//  GLUT initialization
 	glutInit(&argc, argv);
 
-	glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA|GLUT_MULTISAMPLE);
+	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA | GLUT_MULTISAMPLE);
 
 	// Set context
-	glutInitContextVersion (3, 3);
-	glutInitContextProfile (GLUT_CORE_PROFILE );
+	glutInitContextVersion(3, 3);
+	glutInitContextProfile(GLUT_CORE_PROFILE);
 
-	glutInitWindowPosition(100,100);
-	glutInitWindowSize(640,360);
-	glutCreateWindow("Lighthouse3D - VSL Demo");
+	glutInitWindowPosition(100, 100);
+	glutInitWindowSize(1280, 800);
+	glutCreateWindow("VSL Demo - LSystems Tree");
 
+	// Use depth buffering for hidden surface elimination.
+	glEnable(GL_DEPTH_TEST);
 
-//  Callback Registration
+	//  Callback Registration
 	glutDisplayFunc(renderScene);
 	glutReshapeFunc(changeSize);
-	glutIdleFunc(renderScene);
+	glutIdleFunc(animate);
 
-//	Mouse and Keyboard Callbacks
+	//	Mouse and Keyboard Callbacks
 	glutKeyboardFunc(processKeys);
 	glutMouseFunc(processMouseButtons);
 	glutMotionFunc(processMouseMotion);
-	glutMouseWheelFunc ( mouseWheel ) ;
+	glutMouseWheelFunc(mouseWheel);
 
-//	return from main loop
+	//	return from main loop
 	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 
-//	Init GLEW
+	//	Init GLEW
 	glewExperimental = GL_TRUE;
 	glewInit();
 	if (!glewIsSupported("GL_VERSION_3_3")) {
@@ -493,16 +564,99 @@ void initVSL() {
 	setupShaders();
 
 	// init OpenGL and load model
-	if (!init()) {
+	/*if (!init()) {
 		printf("Could not Load the Model\n");
 		exit(1);
-	}
+	}*/
 
 
 	//  GLUT main loop
 	glutMainLoop();
+}
 
+
+// ------------------------------------------------------------
+//
+// Main function
+//
+
+
+int main(int argc, char **argv) {
+
+	Parser parser = Parser();
+	list<ProductionRule> pr;
+
+	int r = -1;
+	std::string grammarFile = PATH_TO_SOURCE;
+	if (parser.setFile(grammarFile + "grammar.txt") == PARSER_FILE_NOT_FOUND) {
+		printf("File Not Found!\n");
+		return -1;
+	}
+
+	r = parser.parse();
+	switch (r) {
+	case(PARSER_DONE):
+		parser.printGrammar();
+		break;
+
+	case(PARSER_AXIOM_INVALID_CHARACTERS):
+		printf("Axiom contains invalid characters!\n");
+		return -1;
+
+	case(PARSER_DEGREE_INVALID_CHARACTERS):
+		printf("Degree contains invalid characters!\n");
+		return -1;
+
+	case(PARSER_PRODUCTION_RULE_INVALID_CHARACTERS):
+		printf("One of the production rules contains invalid characters!\n");
+		return -1;
+
+	case(PARSER_SYNTAX_ERROR):
+		printf("Syntax error (probably some tag \"#\" out of place or missing)...\n");
+		return -1;
+
+	case(PARSER_UNKNOWN_ERROR):
+		printf("UNKNOWN ERROR (probably some tag \"#\" out of place or missing)...\n");
+		return -1;
+
+	case(PARSER_PRODUCTION_RULE_EQUALS_ERROR):
+		printf("One of the production rules has an invalid number of equals \"=\", only one is allowed!\n");
+		return -1;
+
+	case(PARSER_PRODUCTION_RULE_MORE_THAN_1_LEFT):
+		printf("One of the production rules has more than one symbol before \"=\"!\n");
+		return -1;
+
+	default:
+		printf("Unexpected error!\n");
+		return -1;
+	}
+
+	degree = parser.getDegree();
+
+	//			 Axiom					production Rules,				maxLenght,	 maxWidth,	lenght rate,	width rate,		degree rate,	maxDegree; 
+	plant = Tree(parser.getAxiom(),		parser.getProductionRules(),	1.1,		 0.25,		0.01,			0.0001,			0.07,			degree		);
+	
+	r = plant.grow(EXPANSIONS_NUMBER);
+	if (r != TREE_DONE) {
+		switch (r){
+		case (TREE_NODE_INVALID_PRODUCTION_RULE):
+			printf("TREE_NODE_INVALID_PRODUCTION_RULE!!!!\n");
+			break;
+		case (TREE_NODE_UNDIFINED_SYMBOL):
+			printf("TREE_NODE_UNDIFINED_SYMBOL!!!!\n");
+			break;
+		default:
+			printf("ERROR GROWING !!\n");
+			break;
+		}
+	}
+
+	string aux = plant.getLSystem();
+	printf("\nLSystem: \"%s\"\n", aux.data());
+
+
+	glutMain(argc, argv);
 	return(1);
-
-}*/
+}
 

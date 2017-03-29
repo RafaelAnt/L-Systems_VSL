@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\source\vsFontLib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\source\vsGLInfoLib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\source\vsGeometryLib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\source\vsLogLib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\source\vsMathLib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\source\vsModelLib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\source\vsProfileLib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\source\vsResourceLib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\source\vsShaderLib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\source\vsSurfRevLib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\include\vsl\vsFontLib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\include\vsl\vsGLInfoLib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\include\vsl\vsGeometryLib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\include\vsl\vsLogLib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\include\vsl\vsMathLib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\include\vsl\vsModelLib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\include\vsl\vsProfileLib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\include\vsl\vsResourceLib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\include\vsl\vsShaderLib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\include\vsl\vsSurfRevLib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\include\vsl\vslConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\include\vsl\vslibs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4F93DD69-EC21-3F7B-9412-646817A33CDE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{8F8529A7-E938-3153-92BA-482E856ECD01}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

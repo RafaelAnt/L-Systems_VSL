@@ -1,0 +1,13 @@
+prefix=C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/build/bin
+exec_prefix=C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/build/bin
+libdir=
+sharedlibdir=
+includedir=
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.8
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}
