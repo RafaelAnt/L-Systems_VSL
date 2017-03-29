@@ -1,0 +1,25 @@
+# CMake generation dependency list for this directory.
+C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/contrib/assimp3.3.1/CMakeLists.txt
+C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/contrib/assimp3.3.1/revision.h.in
+C:/Program Files/CMake/share/cmake-3.7/Modules/FindPkgConfig.cmake
+C:/Program Files/CMake/share/cmake-3.7/Modules/FindPackageHandleStandardArgs.cmake
+C:/Program Files/CMake/share/cmake-3.7/Modules/FindPackageMessage.cmake
+C:/Program Files/CMake/share/cmake-3.7/Modules/CMakeParseArguments.cmake
+C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/contrib/assimp3.3.1/cmake-modules/PrecompiledHeader.cmake
+C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/contrib/assimp3.3.1/cmake-modules/cmake_uninstall.cmake.in
+C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/contrib/assimp3.3.1/assimp-config.cmake.in
+C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/contrib/assimp3.3.1/assimp-config-version.cmake.in
+C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/contrib/assimp3.3.1/cmake-modules/FindDirectX.cmake
+C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/contrib/assimp3.3.1/cmake-modules/FindPkgMacros.cmake
+C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/contrib/assimp3.3.1/cmake-modules/FindZLIB.cmake
+C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/contrib/assimp3.3.1/cmake-modules/FindPkgMacros.cmake
+C:/Program Files/CMake/share/cmake-3.7/Modules/FindPkgConfig.cmake
+C:/Program Files/CMake/share/cmake-3.7/Modules/FindPackageHandleStandardArgs.cmake
+C:/Program Files/CMake/share/cmake-3.7/Modules/FindPackageMessage.cmake
+C:/Program Files/CMake/share/cmake-3.7/Modules/CMakeParseArguments.cmake
+C:/Program Files/CMake/share/cmake-3.7/Modules/CheckIncludeFile.cmake
+C:/Program Files/CMake/share/cmake-3.7/Modules/CheckTypeSize.cmake
+C:/Program Files/CMake/share/cmake-3.7/Modules/CheckIncludeFile.cmake
+C:/Program Files/CMake/share/cmake-3.7/Modules/CheckIncludeFileCXX.cmake
+C:/Program Files/CMake/share/cmake-3.7/Modules/CheckFunctionExists.cmake
+C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/contrib/assimp3.3.1/assimp.pc.in
