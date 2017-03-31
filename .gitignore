@@ -5,3 +5,7 @@ binW/
 
 build/.vs/
 build/contrib/
+build/demo/
+build/vsl.dir/
+build/VSL/
+Win32/
