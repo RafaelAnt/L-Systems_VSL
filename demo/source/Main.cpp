@@ -18,12 +18,13 @@
 #include "Parser.h"
 #include "TreeNode.h"
 #include "Tree.h"
+#include "config.h"
 
 
 #define PI 3.1415
 #define EXPANSIONS_NUMBER 3
-#define PATH_TO_FILES "C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/demo/../"
-#define PATH_TO_SOURCE "C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/build/demo/"
+#define GROUND_EDGE_LENGHT 10
+
 
 
 VSMathLib *vsml;
@@ -33,7 +34,7 @@ VSShaderLib program, programFonts;
 VSFontLib vsfl;
 #endif
 
-VSModelLib myModel;
+VSModelLib vaseModel, dirtModel;
 VSAxis axis;
 VSGrid gridY;
 
@@ -126,28 +127,10 @@ void renderScene(void) {
 		program.setBlockUniform("Lights", "l_dir", res);
 
 
-		axis.set(5, 0.02f);
-		gridY.set(VSGrid::Y, 10, 200);
-		float redColor[3] = { 1,0,0 };
-		gridY.setColor(VSResourceLib::EMISSIVE, redColor );
+		dirtModel.render();
+	
 
-		/*glPushMatrix();
-		glBegin(GL_TRIANGLES);
-			glColor3f(0.5, 0.1, 0.5);
-			glNormal3f(0.0, 1.0, 0.0);
-			glVertex3f(-10, 0, -10);
-			glNormal3f(0.0, 1.0, 0.0);
-			glVertex3f(10, 0, 10);
-			glNormal3f(0.0, 1.0, 0.0);
-			glVertex3f(10, 0, -10);
-			glNormal3f(0.0, 1.0, 0.0);
-			glVertex3f(-10, 0, 10);
-			glNormal3f(0.0, 1.0, 0.0);
-			glVertex3f(10, 0, 10);
-			glNormal3f(0.0, 1.0, 0.0);
-			glVertex3f(-10, 0, -10);
-		glEnd();
-		glPopMatrix();*/
+
 
 		// Tree
 		int result;
@@ -165,14 +148,13 @@ void renderScene(void) {
 			// start counting primitives
 			glBeginQuery(GL_PRIMITIVES_GENERATED, counterQ);
 			// render array of models
-			for (float x = -2.0f; x < 3.0f; x += 2.0f) {
-				for (float z = -2.0f; z < 3.0f; z += 2.0f) {
-					vsml->pushMatrix(VSMathLib::MODEL);
-					vsml->translate(VSMathLib::MODEL, x, 0.0f, z);
-					myModel.render();
-					vsml->popMatrix(VSMathLib::MODEL);
-				}
-			}
+			
+			vsml->pushMatrix(VSMathLib::MODEL);
+			vsml->scale(1.5f, 1.5f, 1.5f);
+			vsml->translate(VSMathLib::MODEL, 0.0f, -0.65f, 0.0f);
+			vaseModel.render();
+			vsml->popMatrix(VSMathLib::MODEL);
+		
 			axis.render();
 			gridY.render();
 
@@ -385,7 +367,7 @@ void processMouseMotion(int xx, int yy){
 
 void mouseWheel(int wheel, int direction, int x, int y) {
 
-	r += direction * 0.1f;
+	r += -direction * 0.1f;
 	camX = r * sin(alpha * 3.14f / 180.0f) * cos(beta * 3.14f / 180.0f);
 	camZ = r * cos(alpha * 3.14f / 180.0f) * cos(beta * 3.14f / 180.0f);
 	camY = r *   						     sin(beta * 3.14f / 180.0f);
@@ -454,34 +436,54 @@ GLuint setupShaders() {
 // Model loading and OpenGL setup
 //
 
+int prepareDirtModel() {
+	// load dirt model
+	
+	float p[] = { -GROUND_EDGE_LENGHT,0,-GROUND_EDGE_LENGHT,1,
+		GROUND_EDGE_LENGHT,0,-GROUND_EDGE_LENGHT,1,
+		-GROUND_EDGE_LENGHT,0,GROUND_EDGE_LENGHT,1 };
+	float n[] = { 0,1,0,
+		0,1,0,
+		0,1,0 };
+	dirtModel.addMesh(3, p, n, NULL, NULL, NULL, 0, NULL);
+
+	dirtModel.setColor(VSResourceLib::EMISSIVE, 0.75f, 0, 0, 1);
+	return true;
+}
 
 int init(){
-	// load models
+	axis.set(4, 0.01f);
+	gridY.set(VSGrid::Y, 10, 20);
+
+	prepareDirtModel();
+
+	//load vase model
 	std::string modelFile = PATH_TO_FILES;
-	modelFile += "models/fonte-finallambert.dae";
-	if (myModel.load(modelFile)) {
+	modelFile += "models/vase1.obj";
+	
+	// generate a query to count primitives
+	glGenQueries(1, &counterQ);
+	
+	if (vaseModel.load(modelFile)) {
 
-		printf("%s\n", myModel.getInfo().c_str());
-
-		axis.set(5, 0.02f);
-
-		gridY.set(VSGrid::Y, 5, 25);
+		printf("MODEL INFO: %s\n", vaseModel.getInfo().c_str());
 		// some GL settings
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_CULL_FACE);
 		glEnable(GL_MULTISAMPLE);
 		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-		glClearColor(0.75f, 0.75f, 0.75f, 0.75f);
-		glClearColor(0.25f, 0.25f, 0.25f, 0.25f);
-		// generate a query to count primitives
-		glGenQueries(1, &counterQ);
-
+		//cor de barro
+		vaseModel.setColor(VSResourceLib::DIFFUSE, 0.65234375f, 0.3984375f, 0.140625f, 1);
+		//glClearColor(0.75f, 0.75f, 0.75f, 0.75f);
+		//glClearColor(0.25f, 0.25f, 0.25f, 0.25f);
 		return true;
 	}
 	else {
-		printf("%s\n", myModel.getErrors().c_str());
+		printf("MODEL ERROR: %s\n", vaseModel.getErrors().c_str());
 		return false;
 	}
+
+	return true;
 }
 
 
@@ -564,10 +566,10 @@ void glutMain(int argc, char** argv) {
 	setupShaders();
 
 	// init OpenGL and load model
-	/*if (!init()) {
+	if (!init()) {
 		printf("Could not Load the Model\n");
 		exit(1);
-	}*/
+	}
 
 
 	//  GLUT main loop
@@ -587,8 +589,8 @@ int main(int argc, char **argv) {
 	list<ProductionRule> pr;
 
 	int r = -1;
-	std::string grammarFile = PATH_TO_SOURCE;
-	if (parser.setFile(grammarFile + "grammar.txt") == PARSER_FILE_NOT_FOUND) {
+	std::string grammarFile = PATH_TO_FILES;
+	if (parser.setFile(grammarFile + "demo/source/grammar.txt") == PARSER_FILE_NOT_FOUND) {
 		printf("File Not Found!\n");
 		return -1;
 	}
@@ -635,7 +637,7 @@ int main(int argc, char **argv) {
 	degree = parser.getDegree();
 
 	//			 Axiom					production Rules,				maxLenght,	 maxWidth,	lenght rate,	width rate,		degree rate,	maxDegree; 
-	plant = Tree(parser.getAxiom(),		parser.getProductionRules(),	1.1,		 0.25,		0.01,			0.0001,			0.07,			degree		);
+	plant = Tree(parser.getAxiom(),		parser.getProductionRules(),	1.1f,		 0.25f,		0.01f,			0.0001f,		0.07f,			degree		);
 	
 	r = plant.grow(EXPANSIONS_NUMBER);
 	if (r != TREE_DONE) {

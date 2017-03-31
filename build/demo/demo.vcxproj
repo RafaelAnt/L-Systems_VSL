@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -30,25 +30,25 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -61,25 +61,25 @@
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\build\bin\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">demo.dir\Debug\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">TreeL-Systems</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">demo</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\build\bin\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">demo.dir\Release\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">TreeL-Systems</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">demo</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\build\bin\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">demo.dir\MinSizeRel\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">TreeL-Systems</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">demo</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</GenerateManifest>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\build\bin\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">demo.dir\RelWithDebInfo\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">TreeL-Systems</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">demo</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</GenerateManifest>
@@ -115,7 +115,7 @@
     </Midl>
     <Link>
       <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;..\VSL\Debug\vsld.lib;..\contrib\tinyxml\Debug\tinyxmld.lib;..\contrib\freeglut-3.0.0\lib\Debug\freeglut_staticd.lib;..\contrib\assimp3.3.1\code\Debug\assimp-vc140-mt.lib;..\contrib\glew\Debug\glewd.lib;glu32.lib;opengl32.lib;..\..\contrib\devil\lib32\DevIL.lib;winmm.lib;..\contrib\assimp3.3.1\contrib\zlib\Debug\zlibstaticd.lib</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;..\VSL\Debug\vsld.lib;..\contrib\tinyxml\Debug\tinyxmld.lib;..\contrib\freeglut-3.0.0\lib\Debug\freeglut_staticd.lib;..\contrib\assimp3.3.1\code\Debug\assimp-vc140-mtd.lib;..\contrib\glew\Debug\glewd.lib;glu32.lib;opengl32.lib;..\..\contrib\devil\lib32\DevIL.lib;winmm.lib;..\contrib\assimp3.3.1\contrib\zlib\Debug\zlibstaticd.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>Debug</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -320,13 +320,13 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Bezier.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Parser.cpp" />
-    <ClCompile Include="Point.cpp" />
-    <ClCompile Include="ProductionRule.cpp" />
-    <ClCompile Include="Tree.cpp" />
-    <ClCompile Include="TreeNode.cpp" />
+    <ClInclude Include="..\..\demo\source\Bezier.h" />
+    <ClInclude Include="..\..\demo\source\Parser.h" />
+    <ClInclude Include="..\..\demo\source\Point.h" />
+    <ClInclude Include="..\..\demo\source\ProductionRule.h" />
+    <ClInclude Include="..\..\demo\source\Tree.h" />
+    <ClInclude Include="..\..\demo\source\TreeNode.h" />
+    <ClInclude Include="C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\source\config.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/build/ZERO_CHECK.vcxproj">
@@ -352,15 +352,13 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Bezier.h" />
-    <ClInclude Include="Parser.h" />
-    <ClInclude Include="Point.h" />
-    <ClInclude Include="ProductionRule.h" />
-    <ClInclude Include="Tree.h" />
-    <ClInclude Include="TreeNode.h" />
+    <ClCompile Include="..\..\demo\source\Bezier.cpp" />
+    <ClCompile Include="..\..\demo\source\Main.cpp" />
+    <ClCompile Include="..\..\demo\source\Parser.cpp" />
+    <ClCompile Include="..\..\demo\source\Point.cpp" />
+    <ClCompile Include="..\..\demo\source\ProductionRule.cpp" />
+    <ClCompile Include="..\..\demo\source\Tree.cpp" />
+    <ClCompile Include="..\..\demo\source\TreeNode.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
