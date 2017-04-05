@@ -12,12 +12,22 @@ Point::Point(float x, float y, float z) {
 	this->z = z;
 }
 
+Point::Point(const Point3 & b){
+	this->x = b.x;
+	this->y = b.y;
+	this->z = b.z;
+}
+
 Point::~Point() {
 }
 
 float * Point::toVec3f(){
 	float vec[3] = { x, y, z };
 	return vec;
+}
+
+Point3 Point::createPoint3(){
+	return Point3(x,y,z);
 }
 
 Point& Point::operator=(const Point& src) {

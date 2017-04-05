@@ -1,9 +1,11 @@
 #include "Tree.h"
 
-vector<Point> currentPoints;
+// Use Very Simple Libs
+#include <vsl/vslibs.h>
+
+vector<Point3> currentPoints;
 
 Tree::Tree(){
-	//printf("Usei o mau\n");
 	start = TreeNode();
 	maxLength = -1;
 	maxWidth = -1;
@@ -13,7 +15,6 @@ Tree::Tree(){
 }
 
 Tree::Tree(string axiom, list<ProductionRule> prods,float maxLength, float maxWidth, float lengthGrowthRate, float widthGrowthRate, float angleGrowthRate, float angle){
-	//printf("Usei o bom\n");
 	productionRules = list<ProductionRule>(prods);
 	this->maxLength = maxLength;
 	this->maxWidth = maxWidth;
@@ -31,7 +32,7 @@ Tree::Tree(string axiom, list<ProductionRule> prods,float maxLength, float maxWi
 	for (unsigned int j = 1; j < axiom.length(); j++) {
 		ch = axiom.at(j);
 		aux = new TreeNode (ch, last);
-		//printf("char do Treenode:     \'%c\'\n", aux.getType());
+		//printf("char do Tree node:     \'%c\'\n", aux.getType());
 		last->addNode(aux);
 		last = aux;
 	}
@@ -139,8 +140,12 @@ int Tree::drawLine(TreeNode * node) {
 
 
 int Tree::drawIntersection(TreeNode * node){
+	VSSurfRevLib vssrl;
+	
 	if (node->getBranchNumber() > 1) {
-		glutSolidSphere(node->getWidth(), 7, 7);
+		vssrl.createSphere(node->getWidth(), 7);
+		vssrl.render();
+		//glutSolidSphere(, 7, 7);
 	}
 	return TREE_DONE;
 }
@@ -217,7 +222,7 @@ bool isLastFromStage(TreeNode * current) {
 	return true;
 }
 
-Point last;
+Point3 last;
 
 int Tree::buildBranchPoints(TreeNode * current){ //TODO: check and fix!
 	
@@ -234,12 +239,12 @@ int Tree::buildBranchPoints(TreeNode * current){ //TODO: check and fix!
 		
 	//currentPoints.push_back(currentPoint);
 
-	// pra desenhar o ultimo
+	// In order to draw the last one:
 	if (isLastFromStage(current) && current->getStage()== 1) {
 		glPushMatrix();
 		glTranslatef(0, current->getLength(), 0);
 		glGetFloatv(GL_MODELVIEW_MATRIX, modelMatrix);
-		last = Point((float) modelMatrix[12], (float)modelMatrix[13], (float)modelMatrix[14]);
+		last = Point3((float) modelMatrix[12], (float)modelMatrix[13], (float)modelMatrix[14]);
 		glPopMatrix();
 	}
 	
@@ -337,19 +342,19 @@ int gatherPoints(TreeNode* current) {
 	return TREE_DONE;
 }
 
-Point findLastPointForCatmullrom(Point p1, Point p2) {
+/*Point findLastPointForCatmullrom(Point p1, Point p2) {
 	Point p = p2 - p1;
 	p = p2 + p;
 	return p;
-}
+}*/
 
 int Tree::draw(){
-	
+	VSCubicCurve cc;
 	
 	int r = buildpoints(&start);
 
 	//add imaginary first point;
-	currentPoints.push_back(Point(0, -1, 0));
+	currentPoints.push_back(Point3(0, -1, 0));
 	gatherPoints(&start);
 	//add imaginary last point
 	if (currentPoints.size() > 2) {
@@ -359,7 +364,11 @@ int Tree::draw(){
 	
 	else return TREE_NOT_ENOUGH_POINTS_FOR_CATMULLROM; //TODO fix
 
-	vector<Point> drawingPoints = catmullromPath(currentPoints, 8);
+	//vector<Point3> drawingPoints;//= catmullromPath(currentPoints, 8);
+	cc.setType(VSCubicCurve::CATMULL_ROM);
+	cc.set(currentPoints, 20, false);
+	cc.setColor(VSResourceLib::EMISSIVE, 0,1,0,1);
+	cc.render();
 
 	glLoadIdentity();
 	glLineWidth(0.5);
@@ -369,14 +378,14 @@ int Tree::draw(){
 	//if(currentPoints.size() > 0) printf("Last Point is: %f %f %f\n", currentPoints.back()->x, currentPoints.back()->y, currentPoints.back()->z);
 
 
-	glBegin(GL_LINE_STRIP);
+	/*glBegin(GL_LINE_STRIP);
 
 	for (int i = 0; i < (int)drawingPoints.size(); i++) {
 		glVertex3fv(drawingPoints[i].toVec3f());
 	}
 
 	glEnd();
-	drawingPoints.clear();
+	drawingPoints.clear();*/
 	currentPoints.clear();
 	return r;
 }
@@ -384,38 +393,6 @@ int Tree::draw(){
 string Tree::getLSystem(){
 	return start.getLSystem();
 }
-
-//TODO: Remove
-/*void Tree::teste(){
-	printf("\n\n\nTESTE\n\nNumero de filhos:\n");
-
-	
-	TreeNode* aux = &start;
-	list<TreeNode*> qq;
-	int s;
-
-	while (true){
-		
-		//printf("1 passo: %c\n", aux->getType());
-		qq = aux->getNodes();
-		//printf("Passei o 2 passo\n");
-		s = qq.size();
-			
-		printf("\t%d\n", s);
-
-		if (s == 0) {
-			break;
-		}
-		else {
-			//printf("Aux antes:  %x\n", aux);
-			aux = *aux->getNodes().begin();
-			//if (aux == nullptr) 
-			//printf("Aux:  %x\n",aux);
-		}
-	}
-	
-	
-}*/
 
 int Tree::animate(double time){
 	TreeNode *current;
@@ -448,7 +425,11 @@ int Tree::animate(double time){
 	return TREE_DONE;
 }
 
-int Tree::reset(){
+/// <summary>
+/// Resets the tree to its basic form.
+/// </summary>
+/// <returns></returns>
+int Tree::reset() {
 	TreeNode *current;
 	list<TreeNode*> TNlist;
 	list<TreeNode*>::iterator it;

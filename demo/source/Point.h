@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vsl/vslibs.h>
+
 using namespace std;
 
 #define POINT_DONE 400
@@ -12,8 +14,10 @@ public:
 
 	Point();
 	Point(float x, float y, float z);
+	Point(const Point3& b);
 	~Point();
 
+	
 	Point& operator=(const Point& src);
 	Point operator*(const Point& alt);
 	Point operator/(const Point& alt);
@@ -33,6 +37,7 @@ public:
 	Point operator+=(float num);
 
 	float * toVec3f();
+	Point3 createPoint3();
 
 
 

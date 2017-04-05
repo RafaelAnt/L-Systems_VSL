@@ -42,7 +42,7 @@ VSGrid gridY;
 unsigned int aSentence, profileSentence;
 
 // Query to track the number of primitives
-// issued by the tesselation shaders
+// issued by the tessellation shaders
 GLuint counterQ;
 unsigned int primitiveCounter = 0;
 
@@ -128,19 +128,6 @@ void renderScene(void) {
 		program.setBlockUniform("Lights", "l_dir", res);
 
 
-		dirtModel.render();
-	
-
-
-
-		// Tree
-		int result;
-		result = plant.draw();
-		if (result != TREE_DONE && result != TREE_NOT_ENOUGH_POINTS_FOR_CATMULLROM) {
-			printf("Fatal Error: %d\n", result);
-			exit(0);
-		}
-
 		{
 			PROFILE_GL("Render models");
 
@@ -158,6 +145,16 @@ void renderScene(void) {
 		
 			axis.render();
 			gridY.render();
+
+			dirtModel.render();
+
+			// Tree
+			int result;
+			result = plant.draw();
+			if (result != TREE_DONE && result != TREE_NOT_ENOUGH_POINTS_FOR_CATMULLROM) {
+				printf("Fatal Error: %d\n", result);
+				exit(0);
+			}
 
 			// stop counting primitives
 			glEndQuery(GL_PRIMITIVES_GENERATED);
@@ -287,7 +284,7 @@ void processKeys(unsigned char key, int xx, int yy){
 	camZ = r * cos(alpha * 3.14f / 180.0f) * cos(beta * 3.14f / 180.0f);
 	camY = r *   						     sin(beta * 3.14f / 180.0f);
 
-	//  uncomment this if not using an idle func
+	//  uncomment this if not using an idle function
 	//glutPostRedisplay();
 }
 
@@ -361,7 +358,7 @@ void processMouseMotion(int xx, int yy){
 	}
 
 
-	//  uncomment this if not using an idle func
+	//  uncomment this if not using an idle function
 	//	glutPostRedisplay();
 }
 
@@ -373,7 +370,7 @@ void mouseWheel(int wheel, int direction, int x, int y) {
 	camZ = r * cos(alpha * 3.14f / 180.0f) * cos(beta * 3.14f / 180.0f);
 	camY = r *   						     sin(beta * 3.14f / 180.0f);
 
-	//  uncomment this if not using an idle func
+	//  uncomment this if not using an idle function
 	//	glutPostRedisplay();
 }
 
@@ -407,7 +404,7 @@ GLuint setupShaders() {
 	printf("InfoLog for Font Shader\n%s\n\n", programFonts.getAllInfoLogs().c_str());
 
 
-	// Shader formodels
+	// Shader for models
 	program.init();
 	program.loadShader(VSShaderLib::VERTEX_SHADER, path + "shaders/pixeldirdifambspec.vert");
 	program.loadShader(VSShaderLib::FRAGMENT_SHADER, path + "shaders/pixeldirdifambspec.frag");
@@ -444,12 +441,15 @@ GLuint setupShaders() {
 int prepareDirtModel() {
 
 	std::string path = PATH_TO_FILES;
-	path += "textures/dirt.jpg";
+	path += "textures/grass.jpg";
 
 	dirtModel.createCylinder(0.01f, GROUND_RADIUS, 20, 1);
-	dirtModel.setColor(VSResourceLib::EMISSIVE, (float) 58 / 256, (float) 40 / 256, (float) 24 / 256, 1);
+	//dirtModel
+	//dirtModel.setColor(VSResourceLib::AMBIENT, (float) 58 / 256, (float) 40 / 256, (float) 24 / 256, 1);
 	
-	//dirtModel.addTexture(0, path);
+	dirtModel.addTexture(0, path);
+	float shi = 100;
+	dirtModel.setColor(VSResourceLib::SHININESS, &shi);
 
 	return true;
 }
@@ -479,7 +479,7 @@ int init() {
 		glEnable(GL_CULL_FACE);
 		glEnable(GL_MULTISAMPLE);
 		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-		//cor de barro
+		//Clay color
 		vaseModel.setColor(VSResourceLib::DIFFUSE, 0.65234375f, 0.3984375f, 0.140625f, 1);
 		//glClearColor(0.75f, 0.75f, 0.75f, 0.75f);
 		//glClearColor(0.25f, 0.25f, 0.25f, 0.25f);
@@ -499,7 +499,7 @@ void initVSL() {
 	// set the material's block name
 	VSResourceLib::setMaterialBlockName("Material");
 
-	// Init VSML
+	// Initialization VSML
 	vsml = VSMathLib::getInstance();
 	vsml->setUniformBlockName("Matrices");
 	vsml->setUniformName(VSMathLib::PROJ_VIEW_MODEL, "m_pvm");
@@ -509,7 +509,7 @@ void initVSL() {
 
 #if (__VSL_TEXTURE_LOADING__ == 1)
 
-	// Init VSFL Fonts
+	// Initialization VSFL Fonts
 	std::string path = PATH_TO_FILES;
 	vsfl.load(path + "fonts/couriernew10");
 	vsfl.setFixedFont(true);
@@ -642,7 +642,7 @@ int main(int argc, char **argv) {
 
 	degree = parser.getDegree();
 
-	//			 Axiom					production Rules,				maxLenght,	 maxWidth,	lenght rate,	width rate,		degree rate,	maxDegree; 
+	//			 Axiom					production Rules,				maxLenght,	 maxWidth,	length rate,	width rate,		degree rate,	maxDegree; 
 	plant = Tree(parser.getAxiom(),		parser.getProductionRules(),	1.1f,		 0.25f,		0.01f,			0.0001f,		0.07f,			degree		);
 	
 	r = plant.grow(EXPANSIONS_NUMBER);

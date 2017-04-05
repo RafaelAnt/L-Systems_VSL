@@ -22,18 +22,14 @@ class TreeNode {
 	char type;
 	float width;
 	float length;
-	/*float maxLength;
-	float maxWidth;*/
 	float degree;
 	int stage;
 	list<TreeNode*> nodes;
-	Point centralPoint;
-	vector<Point> circlePoints;
+	Point3 centralPoint;
+	vector<Point3> circlePoints;
 	TreeNode *father;
 	float color[3];
 	double created;
-
-
 	
 
 public:
@@ -49,30 +45,22 @@ public:
 	int setLength(float newLength);
 	float getDegree();
 	int setDegree(float newDegree);
-	/*float getMaxWidth();
-	int seMaxtWidth(float newWidth);
-	float getMaxLength();
-	int setMaxLength(float newLength);*/
 	int getStage();
 	int setStage(int newStage);
 	double getCreated();
 	int setCreated(double time);
 	list<TreeNode*> getNodes();
 	void addNode(TreeNode* node);
-	Point getCentralPoint();
-	int setCentralPoint(Point p);
+	Point3 getCentralPoint();
+	int setCentralPoint(Point3 p);
 	int setCentralPoint(float x, float y, float z);
-	vector<Point> getCirclePoints();
-	int setCirclePoints(vector<Point> points);
+	vector<Point3> getCirclePoints();
+	int setCirclePoints(vector<Point3> points);
 	TreeNode* getFather();
 	int setFather(TreeNode *newFather);
 
-
-	//int addPoint(Point p);
 	int grow(list<ProductionRule> prodRule);
 	string getLSystem();
-	/*int incrementLength(float ratio);
-	int incrementWidth(float ratio);*/
 	int getBranchNumber();
 	int clearPoints();
 

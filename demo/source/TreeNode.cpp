@@ -1,14 +1,10 @@
 #include "TreeNode.h"
 
-
-
 TreeNode::TreeNode(){
 	this->type = '0';
 	width = -1;
 	length = -1;
 	degree = 1;
-	/*maxWidth = 1;
-	maxLength = 1;*/
 	stage = -1;
 	nodes = list<TreeNode*>();
 	color[0] = -1;
@@ -23,8 +19,6 @@ TreeNode::TreeNode(char type, TreeNode* father){
 	width = 0;
 	length = 0;
 	degree = 1;
-	/*maxWidth = 1;
-	maxLength = 1;*/
 	stage = 1;
 	nodes = list<TreeNode*>();
 	color[0] = 0;
@@ -34,32 +28,15 @@ TreeNode::TreeNode(char type, TreeNode* father){
 	this->father = father;
 }
 
-//UNUSED
-/*TreeNode::TreeNode(char type, TreeNode * father, float angle){
-	this->type = type;
-	width = 1;
-	length = 0;
-	stage = 1;
-	nodes = list<TreeNode*>();
-	color[0] = 0;
-	color[1] = 1;
-	color[3] = 0;
-	created = timeGetTime();
-	this->angle = angle;
-	this->father = father;
-}*/
-
 
 TreeNode::TreeNode(char type, TreeNode * father, int stage){
 	this->type = type;
 	width = 0;
 	length = 0;
 	degree = 1;
-	/*maxWidth = 1;
-	maxLength = 1;*/
 	this->stage = stage;
-	circlePoints = vector<Point>();
-	centralPoint = Point(0, 0, 0);
+	circlePoints = vector<Point3>();
+	centralPoint = Point3(0, 0, 0);
 	nodes = list<TreeNode*>();
 	color[0] = 0;
 	color[1] = 1;
@@ -77,8 +54,8 @@ TreeNode::TreeNode(const TreeNode &node) {
 	this->length = node.length;
 	this->degree = node.degree;
 	this->stage = node.stage;
-	circlePoints = vector<Point>();
-	centralPoint = Point(0, 0, 0);
+	circlePoints = vector<Point3>();
+	centralPoint = Point3(0, 0, 0);
 	this->nodes = list<TreeNode*>(node.nodes);
 	this->color[0] = node.color[0];
 	this->color[1] = node.color[1];
@@ -124,26 +101,6 @@ int TreeNode::setDegree(float newDegree){
 	return TREE_NODE_DONE;
 }
 
-/*float TreeNode::getMaxWidth(){
-	return maxWidth;
-}
-
-int TreeNode::seMaxtWidth(float newWidth){
-	if (newWidth <= 0) return TREE_NODE_INVALID_VALUE;
-	this->maxWidth = newWidth;
-	return TREE_NODE_DONE;
-}
-
-float TreeNode::getMaxLength(){
-	return maxLength;
-}
-
-int TreeNode::setMaxLength(float newLength){
-	if (newLength <= 0) return TREE_NODE_INVALID_VALUE;
-	this->maxWidth = newLength;
-	return TREE_NODE_DONE;
-}*/
-
 int TreeNode::getStage(){
 	return stage;
 }
@@ -165,14 +122,6 @@ int TreeNode::setCreated(double time){
 	return TREE_NODE_DONE;
 }
 
-/*float TreeNode::getAngle(){
-	return angle;
-}
-
-void TreeNode::setAngle(float newAngle){
-	angle = newAngle;
-}*/
-
 list<TreeNode*> TreeNode::getNodes(){
 	return nodes;
 }
@@ -181,26 +130,26 @@ void TreeNode::addNode(TreeNode* node){
 	nodes.push_back(node);
 }
 
-Point TreeNode::getCentralPoint(){
+Point3 TreeNode::getCentralPoint(){
 	return this->centralPoint;
 }
 
-int TreeNode::setCentralPoint(Point p){
+int TreeNode::setCentralPoint(Point3 p){
 	//if (p == nullptr) return TREE_NODE_NULL_POINT;
 	this->centralPoint = p;
 	return TREE_NODE_DONE;
 }
 
 int TreeNode::setCentralPoint(float x, float y, float z){
-	this->centralPoint = Point(x, y, z);
+	this->centralPoint = Point3(x, y, z);
 	return TREE_NODE_DONE;
 }
 
-vector<Point> TreeNode::getCirclePoints(){
+vector<Point3> TreeNode::getCirclePoints(){
 	return circlePoints;
 }
 
-int TreeNode::setCirclePoints(vector<Point> points){
+int TreeNode::setCirclePoints(vector<Point3> points){
 	this->circlePoints = points;
 	return TREE_NODE_DONE;
 }
@@ -275,7 +224,7 @@ int TreeNode::grow(list<ProductionRule> prodRule){
 			case 'F':
 				aux = new TreeNode('F', current, stageMod);
 				current->addNode(aux);
-				//printf("\t\tF\t\tAdicionado novo F ao current: angulo: %f, stage: %d\n", aux->getAngle(), stageMod);
+				//printf("\t\tF\t\tNew F Added to Current: angle: %f, stage: %d\n", aux->getAngle(), stageMod);
 				current = aux;
 				break;
 
@@ -323,20 +272,20 @@ int TreeNode::grow(list<ProductionRule> prodRule){
 }
 
 string TreeNode::getLSystem(){
-	//printf("teste\n");
+	//printf("TEST\n");
 	list<TreeNode*>::iterator it;
 	TreeNode* aux;
 	string r;
 	r += type;
 
 	if (nodes.size() == 0) {
-		//printf("0 filhos\n");
+		//printf("0 Children\n");
 		return r;
 	}
 
 	if (nodes.size() >= 1) {
 
-		//printf("1 ou mais filhos\n");
+		//printf("1 or more Children\n");
 		
 		for (it = nodes.begin(); it != nodes.end(); it++) {
 			aux = *it;

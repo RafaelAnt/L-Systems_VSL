@@ -2,7 +2,6 @@
 #include <iostream>
 #include <list>
 #include <stdio.h>
-#include <GL/glut.h>
 #include <stack> 
 #include <deque>
 

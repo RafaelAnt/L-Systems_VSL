@@ -38,6 +38,7 @@
 #include "vsSurfRevLib.h"
 
 
+
  /* -------------------------------------------------
 				VSCartesian
  ------------------------------------------------- */
@@ -122,6 +123,11 @@ public:
 	Point3() {
 		x = 0.0f; y = 0.0f; z = 0.0f;
 	};
+
+	float * Point3::toVec3f() {
+		float vec[3] = { x, y, z };
+		return vec;
+	}
 };
 
 

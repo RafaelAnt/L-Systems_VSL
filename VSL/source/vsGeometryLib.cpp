@@ -823,7 +823,7 @@ VSCubicPatch::VSCubicPatch(): mTessLevel(1), mInit(false) { }
 void 
 VSCubicPatch::set(const std::vector<Point3> &cp, unsigned int tessLevel) {
 
-	assert("16 control points are required and tessellationlevel must be greater than zero" && cp.size() >= 16 && tessLevel > 0);
+	assert("16 control points are required and tessellation level must be greater than zero" && cp.size() >= 16 && tessLevel > 0);
 
 	mInit = true;
 
