@@ -1,4 +1,96 @@
 ﻿  Main.cpp
+c:\users\rafael\documents\github\l-systems_vsl\contrib\assimp3.3.1\include\assimp\config.h(42): warning C4635: XML document comment applied to 'aiComponent': badly-formed XML: Invalid at the top level of the document.
+  
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include\assimp/Importer.hpp(552): warning C4635: XML document comment applied to 'Assimp.Importer.GetExtensionList(std.basic_string<System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte,std.char_traits{System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte},std.allocator<System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte>>*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)': badly-formed XML: A name was started with an invalid character.
+  
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include\assimp/Importer.hpp(564): warning C4635: XML document comment applied to 'Assimp.Importer.GetImporterInfo(System.UInt32)': badly-formed XML: Invalid at the top level of the document.
+  
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include\assimp/postprocess.h(69): warning C4635: XML document comment applied to 'aiProcess_CalcTangentSpace': badly-formed XML: The following tags were not closed: hr.
+  
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include\assimp/postprocess.h(81): warning C4635: XML document comment applied to 'aiProcess_JoinIdenticalVertices': badly-formed XML: The following tags were not closed: hr.
+  
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include\assimp/postprocess.h(94): warning C4635: XML document comment applied to 'aiProcess_MakeLeftHanded': badly-formed XML: The following tags were not closed: hr.
+  
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include\assimp/postprocess.h(110): warning C4635: XML document comment applied to 'aiProcess_Triangulate': badly-formed XML: The following tags were not closed: hr.
+  
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include\assimp/postprocess.h(126): warning C4635: XML document comment applied to 'aiProcess_RemoveComponent': badly-formed XML: The following tags were not closed: hr.
+  
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include\assimp/postprocess.h(152): warning C4635: XML document comment applied to 'aiProcess_GenNormals': badly-formed XML: The following tags were not closed: hr.
+  
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include\assimp/postprocess.h(166): warning C4635: XML document comment applied to 'aiProcess_GenSmoothNormals': badly-formed XML: The following tags were not closed: hr.
+  
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include\assimp/postprocess.h(183): warning C4635: XML document comment applied to 'aiProcess_SplitLargeMeshes': badly-formed XML: The following tags were not closed: hr.
+  
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include\assimp/postprocess.h(202): warning C4635: XML document comment applied to 'aiProcess_PreTransformVertices': badly-formed XML: The following tags were not closed: hr.
+  
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include\assimp/postprocess.h(223): warning C4635: XML document comment applied to 'aiProcess_LimitBoneWeights': badly-formed XML: The following tags were not closed: hr.
+  
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include\assimp/postprocess.h(239): warning C4635: XML document comment applied to 'aiProcess_ValidateDataStructure': badly-formed XML: The following tags were not closed: hr.
+  
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include\assimp/postprocess.h(267): warning C4635: XML document comment applied to 'aiProcess_ImproveCacheLocality': badly-formed XML: The following tags were not closed: hr.
+  
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include\assimp/postprocess.h(282): warning C4635: XML document comment applied to 'aiProcess_RemoveRedundantMaterials': badly-formed XML: The following tags were not closed: hr.
+  
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include\assimp/postprocess.h(303): warning C4635: XML document comment applied to 'aiProcess_FixInfacingNormals': badly-formed XML: The following tags were not closed: hr.
+  
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include\assimp/postprocess.h(317): warning C4635: XML document comment applied to 'aiProcess_SortByPType': badly-formed XML: The following tags were not closed: hr.
+  
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include\assimp/postprocess.h(331): warning C4635: XML document comment applied to 'aiProcess_FindDegenerates': badly-formed XML: The following tags were not closed: hr, br, br, br, br.
+  
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include\assimp/postprocess.h(369): warning C4635: XML document comment applied to 'aiProcess_FindInvalidData': badly-formed XML: The following tags were not closed: hr, br.
+  
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include\assimp/postprocess.h(384): warning C4635: XML document comment applied to 'aiProcess_GenUVCoords': badly-formed XML: The following tags were not closed: hr.
+  
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include\assimp/postprocess.h(401): warning C4635: XML document comment applied to 'aiProcess_TransformUVCoords': badly-formed XML: The following tags were not closed: hr.
+  
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include\assimp/postprocess.h(418): warning C4635: XML document comment applied to 'aiProcess_FindInstances': badly-formed XML: The following tags were not closed: hr.
+  
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include\assimp/postprocess.h(433): warning C4635: XML document comment applied to 'aiProcess_OptimizeMeshes': badly-formed XML: The following tags were not closed: hr.
+  
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include\assimp/postprocess.h(445): warning C4635: XML document comment applied to 'aiProcess_OptimizeGraph': badly-formed XML: The following tags were not closed: hr.
+  
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include\assimp/postprocess.h(473): warning C4635: XML document comment applied to 'aiProcess_FlipUVs': badly-formed XML: The following tags were not closed: hr.
+  
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include\assimp/postprocess.h(493): warning C4635: XML document comment applied to 'aiProcess_FlipWindingOrder': badly-formed XML: The following tags were not closed: hr.
+  
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include\assimp/postprocess.h(508): warning C4635: XML document comment applied to 'aiProcess_SplitByBoneCount': badly-formed XML: The following tags were not closed: hr.
+  
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include\assimp/postprocess.h(514): warning C4635: XML document comment applied to 'aiProcess_Debone': badly-formed XML: The following tags were not closed: hr.
+  
+c:\users\rafael\documents\github\l-systems_vsl\contrib\assimp3.3.1\include\assimp\mesh.h(42): warning C4635: XML document comment applied to 'aiFace': badly-formed XML: Invalid at the top level of the document.
+  
+c:\users\rafael\documents\github\l-systems_vsl\contrib\assimp3.3.1\include\assimp\mesh.h(431): warning C4635: XML document comment applied to 'aiAnimMesh.HasVertexColors(System.UInt32)': badly-formed XML: Invalid at the top level of the document.
+  
+c:\users\rafael\documents\github\l-systems_vsl\contrib\assimp3.3.1\include\assimp\mesh.h(438): warning C4635: XML document comment applied to 'aiAnimMesh.HasTextureCoords(System.UInt32)': badly-formed XML: Invalid at the top level of the document.
+  
+c:\users\rafael\documents\github\l-systems_vsl\contrib\assimp3.3.1\include\assimp\light.h(99): warning C4635: XML document comment applied to 'aiLight': badly-formed XML: Invalid at the top level of the document.
+  
+c:\users\rafael\documents\github\l-systems_vsl\contrib\assimp3.3.1\include\assimp\camera.h(42): warning C4635: XML document comment applied to 'aiCamera': badly-formed XML: Invalid at the top level of the document.
+  
+c:\users\rafael\documents\github\l-systems_vsl\contrib\assimp3.3.1\include\assimp\material.h(42): warning C4635: XML document comment applied to 'aiTextureOp': badly-formed XML: Invalid at the top level of the document.
+  
+c:\users\rafael\documents\github\l-systems_vsl\contrib\assimp3.3.1\include\assimp\material.h(175): warning C4635: XML document comment applied to 'aiTextureType': badly-formed XML: Invalid at the top level of the document.
+  
+c:\users\rafael\documents\github\l-systems_vsl\contrib\assimp3.3.1\include\assimp\material.h(292): warning C4635: XML document comment applied to 'aiShadingMode': badly-formed XML: Invalid at the top level of the document.
+  
+c:\users\rafael\documents\github\l-systems_vsl\contrib\assimp3.3.1\include\assimp\material.h(405): warning C4635: XML document comment applied to 'aiBlendMode': badly-formed XML: Invalid at the top level of the document.
+  
+c:\users\rafael\documents\github\l-systems_vsl\contrib\assimp3.3.1\include\assimp\material.h(541): warning C4635: XML document comment applied to 'aiMaterialProperty': badly-formed XML: Invalid at the top level of the document.
+  
+c:\users\rafael\documents\github\l-systems_vsl\contrib\assimp3.3.1\include\assimp\material.h(1321): warning C4635: XML document comment applied to 'aiGetMaterialFloatArray(aiMaterial!System.Runtime.CompilerServices.IsConst*,System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte!System.Runtime.CompilerServices.IsConst*,System.UInt32,System.UInt32,System.Single*,System.UInt32*)': badly-formed XML: A semi colon character was expected.
+  
+c:\users\rafael\documents\github\l-systems_vsl\contrib\assimp3.3.1\include\assimp\material.h(1358): warning C4635: XML document comment applied to 'aiGetMaterialFloat(aiMaterial!System.Runtime.CompilerServices.IsConst*,System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte!System.Runtime.CompilerServices.IsConst*,System.UInt32,System.UInt32,System.Single*)': badly-formed XML: A semi colon character was expected.
+  
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\demo\..\contrib\assimp3.3.1\include\assimp/scene.h(73): warning C4635: XML document comment applied to 'aiNode.mName': badly-formed XML: Invalid at the top level of the document.
+  
+c:\users\rafael\documents\github\l-systems_vsl\vsl\include\vsl\vsShaderLib.h(143): warning C4635: XML document comment applied to 'VSShaderLib.setUniform(std.basic_string<System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte,std.char_traits{System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte},std.allocator<System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte>>,System.Void*)': badly-formed XML: Invalid at the top level of the document.
+  
+c:\users\rafael\documents\github\l-systems_vsl\vsl\include\vsl\vsShaderLib.h(145): warning C4635: XML document comment applied to 'VSShaderLib.setUniform(std.basic_string<System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte,std.char_traits{System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte},std.allocator<System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte>>,System.Int32)': badly-formed XML: Invalid at the top level of the document.
+  
+c:\users\rafael\documents\github\l-systems_vsl\vsl\include\vsl\vsShaderLib.h(147): warning C4635: XML document comment applied to 'VSShaderLib.setUniform(std.basic_string<System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte,std.char_traits{System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte},std.allocator<System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte>>,System.Single)': badly-formed XML: Invalid at the top level of the document.
+  
+..\..\demo\source\Main.cpp(448): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\..\demo\source\Main.cpp(450): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
      Creating library C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/build/demo/Release/demo.lib and object C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/build/demo/Release/demo.exp
 vsl.lib(vsMathLib.obj) : warning LNK4217: locally defined symbol ___glewGetUniformLocation imported in function "public: void __thiscall VSMathLib::matricesToGL(void)" (?matricesToGL@VSMathLib@@QAEXXZ)
 vsl.lib(vsShaderLib.obj) : warning LNK4049: locally defined symbol ___glewGetUniformLocation imported

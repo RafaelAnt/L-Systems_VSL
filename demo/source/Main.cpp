@@ -23,7 +23,7 @@
 
 #define PI 3.1415
 #define EXPANSIONS_NUMBER 3
-#define GROUND_EDGE_LENGHT 10
+#define GROUND_RADIUS 0.93f
 
 
 
@@ -34,7 +34,8 @@ VSShaderLib program, programFonts;
 VSFontLib vsfl;
 #endif
 
-VSModelLib vaseModel, dirtModel;
+VSModelLib vaseModel;
+VSSurfRevLib dirtModel;
 VSAxis axis;
 VSGrid gridY;
 
@@ -433,25 +434,31 @@ GLuint setupShaders() {
 
 // ------------------------------------------------------------
 //
-// Model loading and OpenGL setup
+// 
 //
 
+/// <summary>
+/// Prepares and Loads the dirt model.
+/// </summary>
+/// <returns></returns>
 int prepareDirtModel() {
-	// load dirt model
-	
-	float p[] = { -GROUND_EDGE_LENGHT,0,-GROUND_EDGE_LENGHT,1,
-		GROUND_EDGE_LENGHT,0,-GROUND_EDGE_LENGHT,1,
-		-GROUND_EDGE_LENGHT,0,GROUND_EDGE_LENGHT,1 };
-	float n[] = { 0,1,0,
-		0,1,0,
-		0,1,0 };
-	dirtModel.addMesh(3, p, n, NULL, NULL, NULL, 0, NULL);
 
-	dirtModel.setColor(VSResourceLib::EMISSIVE, 0.75f, 0, 0, 1);
+	std::string path = PATH_TO_FILES;
+	path += "textures/dirt.jpg";
+
+	dirtModel.createCylinder(0.01f, GROUND_RADIUS, 20, 1);
+	dirtModel.setColor(VSResourceLib::EMISSIVE, (float) 58 / 256, (float) 40 / 256, (float) 24 / 256, 1);
+	
+	//dirtModel.addTexture(0, path);
+
 	return true;
 }
 
-int init(){
+/// <summary>
+/// OpenGL Setup.
+/// </summary>
+/// <returns></returns>
+int init() {
 	axis.set(4, 0.01f);
 	gridY.set(VSGrid::Y, 10, 20);
 
@@ -512,12 +519,11 @@ void initVSL() {
 #endif
 }
 
-// ------------------------------------------------------------
-//
-//  Init Glut Function
-//
-
-
+/// <summary>
+/// Auxiliary main function which initiates GLUT.
+/// </summary>
+/// <param name="argc">The argc.</param>
+/// <param name="argv">The argv.</param>
 void glutMain(int argc, char** argv) {
 
 	//  GLUT initialization

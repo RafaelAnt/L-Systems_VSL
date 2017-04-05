@@ -1,0 +1,17 @@
+﻿  Building Custom Rule C:/Users/Rafael/Documents/GitHub/L-Systems_VSL/VSL/CMakeLists.txt
+  CMake does not need to re-run because C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\build\VSL\CMakeFiles\generate.stamp is up-to-date.
+  vsFontLib.cpp
+  vsGLInfoLib.cpp
+  vsGeometryLib.cpp
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\source\vsGeometryLib.cpp(663): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\source\vsGeometryLib.cpp(697): warning C4018: '<': signed/unsigned mismatch
+  vsLogLib.cpp
+  vsMathLib.cpp
+  vsModelLib.cpp
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\source\vsModelLib.cpp(866): warning C4018: '>=': signed/unsigned mismatch
+  vsProfileLib.cpp
+  vsResourceLib.cpp
+  vsShaderLib.cpp
+  vsSurfRevLib.cpp
+  Generating Code...
+  vsl.vcxproj -> C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\build\VSL\Debug\vsld.lib

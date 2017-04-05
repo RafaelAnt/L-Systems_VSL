@@ -835,11 +835,19 @@ VSModelLib::addCubeMapTexture(unsigned int unit, std::string posX, std::string n
 
 #endif
 
-/**
-*	
-*@returns the number of the new mesh.
-*/
-int 
+/// <summary>
+/// Adds the mesh.
+/// </summary>
+/// <param name="nump">The nump.</param>
+/// <param name="p">The points.</param>
+/// <param name="n">The normals.</param>
+/// <param name="tc">The tc.</param>
+/// <param name="tang">The tang.</param>
+/// <param name="bitan">The bitan.</param>
+/// <param name="numInd">The number ind.</param>
+/// <param name="indices">The indices.</param>
+/// <returns>the number of the new mesh.</returns>
+int
 VSModelLib::addMesh(size_t nump, float *p, float *n, float *tc, float *tang, float *bitan, size_t numInd, unsigned int *indices) {
 	MyMesh m;
 	buildVAO(m, nump, p, n, tc, tang, bitan, numInd, indices);
