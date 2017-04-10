@@ -3370,19 +3370,19 @@ Prepare matrices for rendering at (x,y) window coordinates
 <member name="M:VSFontLib.restoreRender" decl="true" source="c:\users\rafael\documents\github\l-systems_vsl\vsl\include\vsl\vsfontlib.h" line="194">
 Restore the original matrices prior to prepareRender
 </member>
-<member name="M:prepareDirtModel" decl="false" source="c:\users\rafael\documents\github\l-systems_vsl\demo\source\main.cpp" line="439">
+<member name="M:prepareDirtModel" decl="false" source="c:\users\rafael\documents\github\l-systems_vsl\demo\source\main.cpp" line="437">
 <summary>
 Prepares and Loads the dirt model.
 </summary>
 <returns></returns>
 </member>
-<member name="M:init" decl="false" source="c:\users\rafael\documents\github\l-systems_vsl\demo\source\main.cpp" line="463">
+<member name="M:init" decl="false" source="c:\users\rafael\documents\github\l-systems_vsl\demo\source\main.cpp" line="457">
 <summary>
 OpenGL Setup.
 </summary>
 <returns></returns>
 </member>
-<member name="M:glutMain(System.Int32,System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte**)" decl="false" source="c:\users\rafael\documents\github\l-systems_vsl\demo\source\main.cpp" line="528">
+<member name="M:glutMain(System.Int32,System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte**)" decl="false" source="c:\users\rafael\documents\github\l-systems_vsl\demo\source\main.cpp" line="522">
 <summary>
 Auxiliary main function which initiates GLUT.
 </summary>

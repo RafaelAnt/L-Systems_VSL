@@ -411,6 +411,11 @@ VSSurfRevLib::computeVAO(int numP, float *p, float *points, int sides, float smo
 			sizeof(float) * 16);
 
 	mMyMeshes.push_back(aMesh);
+	vertex.clear();
+	normal.clear();
+	textco.clear();
+	tangent.clear();
+	bitangent.clear();
 }
 
 

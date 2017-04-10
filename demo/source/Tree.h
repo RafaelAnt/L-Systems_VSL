@@ -30,11 +30,12 @@ class Tree {
 	float widthGrowthRate;
 	float angleGrowthRate;
 	float angle;
+	VSMathLib *vsml;
 
 
 public:
 	Tree();
-	Tree(string axiom, list<ProductionRule> prods, float maxLength, float maxWidth, float lengthGrowthRate, float widthGrowthRate, float angleGrowthRate, float angle);
+	Tree(string axiom, list<ProductionRule> prods, float maxLength, float maxWidth, float lengthGrowthRate, float widthGrowthRate, float angleGrowthRate, float angle, VSMathLib* vsml);
 
 	TreeNode getStart();
 	int setStart(TreeNode start);

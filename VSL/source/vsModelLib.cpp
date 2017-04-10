@@ -64,7 +64,7 @@ VSModelLib::VSModelLib():pUseAdjacency(false) {
 VSModelLib::~VSModelLib() {
 
 	for (unsigned int i = 0; i < mMyMeshes.size(); ++i) {
-		//glDeleteVertexArrays(1,&(mMyMeshes[i].vao));
+		glDeleteVertexArrays(1,&(mMyMeshes[i].vao));
 		glDeleteBuffers(1, &(mMyMeshes[i].vboPos));
 		glDeleteBuffers(1, &(mMyMeshes[i].vboNormal));
 		glDeleteBuffers(1, &(mMyMeshes[i].vboTangent));

@@ -632,6 +632,7 @@ VSCubicCurve::VSCubicCurve() {
 	mCtrlPts[2].x =  0.5f; mCtrlPts[2].y = 1.0f; mCtrlPts[2].z = 0.0f;
 	mCtrlPts[3].x =  1.0f; mCtrlPts[3].y = 0.0f; mCtrlPts[3].z = 0.0f;
 	mType = CATMULL_ROM;
+	mTessLevel = 10;
 }
 
 

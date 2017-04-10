@@ -642,8 +642,8 @@ int main(int argc, char **argv) {
 
 	degree = parser.getDegree();
 
-	//			 Axiom					production Rules,				maxLenght,	 maxWidth,	length rate,	width rate,		degree rate,	maxDegree; 
-	plant = Tree(parser.getAxiom(),		parser.getProductionRules(),	1.1f,		 0.25f,		0.01f,			0.0001f,		0.07f,			degree		);
+	//			 Axiom					production Rules,				maxLenght,	 maxWidth,	length rate,	width rate,		degree rate,	maxDegree;		VSMathLib;
+	plant = Tree(parser.getAxiom(),		parser.getProductionRules(),	1.1f,		 0.25f,		0.01f,			0.0001f,		0.07f,			degree,			vsml		);
 	
 	r = plant.grow(EXPANSIONS_NUMBER);
 	if (r != TREE_DONE) {

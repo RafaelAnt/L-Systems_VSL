@@ -5,6 +5,7 @@
 
 vector<Point3> currentPoints;
 
+
 Tree::Tree(){
 	start = TreeNode();
 	maxLength = -1;
@@ -14,7 +15,7 @@ Tree::Tree(){
 	angleGrowthRate = -1;
 }
 
-Tree::Tree(string axiom, list<ProductionRule> prods,float maxLength, float maxWidth, float lengthGrowthRate, float widthGrowthRate, float angleGrowthRate, float angle){
+Tree::Tree(string axiom, list<ProductionRule> prods,float maxLength, float maxWidth, float lengthGrowthRate, float widthGrowthRate, float angleGrowthRate, float angle, VSMathLib * vsml){
 	productionRules = list<ProductionRule>(prods);
 	this->maxLength = maxLength;
 	this->maxWidth = maxWidth;
@@ -23,6 +24,7 @@ Tree::Tree(string axiom, list<ProductionRule> prods,float maxLength, float maxWi
 	this->angleGrowthRate = angleGrowthRate;
 	this->angle = angle;
 	TreeNode *aux;
+	this->vsml = vsml;
 
 	char ch = axiom.at(0);
 	start = TreeNode(ch, nullptr);
@@ -118,19 +120,28 @@ int Tree::drawLine(TreeNode * node) {
 	GLfloat specular[4] = { 0.55f, 0.27f, 0.07f };   // specular reflection
 	GLfloat diffuse[4] = { 0.55f, 0.27f, 0.07f };   // diffuse reflection
 
+	
 													// set the ambient reflection for the object
 	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambient);
 	// set the diffuse reflection for the object
 	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuse);
 	// set the specular reflection for the object      
 	//glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, specular);*/
+	VSModelLib linha;
+	VSPolyLine pp;
+	vector<Point3> points={
+		Point3(0,0,0),
+		Point3(0,node->getLength(),0)
+	};
+	pp.set(points);
+	pp.setColor(VSResourceLib::EMISSIVE, 0, 1, 0, 1);
+	pp.render();
+	//glLineWidth(0.5);
 
-	glLineWidth(0.5);
-
-	glBegin(GL_LINES);
+	/*glBegin(GL_LINES);
 		glVertex3f(0, 0, 0);
 		glVertex3f(0, node->getLength(), 0);
-	glEnd();
+	glEnd();*/
 	//glTranslatef(0, node->getLength(), 0);
 	
 	//glPopAttrib();
@@ -144,8 +155,10 @@ int Tree::drawIntersection(TreeNode * node){
 	
 	if (node->getBranchNumber() > 1) {
 		vssrl.createSphere(node->getWidth(), 7);
+		vssrl.setColor(VSResourceLib::EMISSIVE, 0, 1, 0, 1);
 		vssrl.render();
 		//glutSolidSphere(, 7, 7);
+		
 	}
 	return TREE_DONE;
 }
@@ -156,15 +169,16 @@ int Tree::drawIntersection(TreeNode * node){
 }*/
 
 void Tree::rotL(TreeNode* node) {
-	glRotatef(node->getDegree(), 1, 0, 0);
-	glRotatef(node->getDegree(), 0, 1, 0);
-	glRotatef(node->getDegree(), 0, 0, 1);
+	
+	vsml->rotate(node->getDegree(), 1, 0, 0);
+	vsml->rotate(node->getDegree(), 0, 1, 0);
+	vsml->rotate(node->getDegree(), 0, 0, 1);
 }
 
 void Tree::rotR(TreeNode* node) {
-	glRotatef(-node->getDegree(), 1, 0, 0);
-	glRotatef(node->getDegree(), 0, 1, 0);
-	glRotatef(-node->getDegree(), 0, 0, 1);
+	vsml->rotate(-node->getDegree(), 1, 0, 0);
+	vsml->rotate(node->getDegree(), 0, 1, 0);
+	vsml->rotate(-node->getDegree(), 0, 0, 1);
 }
 
 int Tree::incrementLength(TreeNode *current){
@@ -241,7 +255,8 @@ int Tree::buildBranchPoints(TreeNode * current){ //TODO: check and fix!
 
 	// In order to draw the last one:
 	if (isLastFromStage(current) && current->getStage()== 1) {
-		glPushMatrix();
+		//glPushMatrix();
+		vsml->pushMatrix(VSMathLib::VIEW);
 		glTranslatef(0, current->getLength(), 0);
 		glGetFloatv(GL_MODELVIEW_MATRIX, modelMatrix);
 		last = Point3((float) modelMatrix[12], (float)modelMatrix[13], (float)modelMatrix[14]);
@@ -351,11 +366,11 @@ int gatherPoints(TreeNode* current) {
 int Tree::draw(){
 	VSCubicCurve cc;
 	
-	int r = buildpoints(&start);
+	int r= buildpoints(&start);
 
 	//add imaginary first point;
 	currentPoints.push_back(Point3(0, -1, 0));
-	gatherPoints(&start);
+	//gatherPoints(&start);
 	//add imaginary last point
 	if (currentPoints.size() > 2) {
 		//currentPoints.push_back(findLastPointForCatmullrom(currentPoints[currentPoints.size() - 2], currentPoints[currentPoints.size() - 1]));
@@ -365,13 +380,13 @@ int Tree::draw(){
 	else return TREE_NOT_ENOUGH_POINTS_FOR_CATMULLROM; //TODO fix
 
 	//vector<Point3> drawingPoints;//= catmullromPath(currentPoints, 8);
-	cc.setType(VSCubicCurve::CATMULL_ROM);
-	cc.set(currentPoints, 20, false);
-	cc.setColor(VSResourceLib::EMISSIVE, 0,1,0,1);
-	cc.render();
+	//cc.setType(VSCubicCurve::CATMULL_ROM);
+	//cc.set(currentPoints, 20, false);
+	//cc.setColor(VSResourceLib::EMISSIVE, 0,1,0,1);
+	//cc.render();
 
-	glLoadIdentity();
-	glLineWidth(0.5);
+	////glLoadIdentity();
+	//glLineWidth(0.5);
 	
 
 	//glVertex3f(0, 0, 0);
