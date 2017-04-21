@@ -1,3 +1,1 @@
-﻿  vsModelLib.cpp
-C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\source\vsModelLib.cpp(866): warning C4018: '>=': signed/unsigned mismatch
-  vsl.vcxproj -> C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\build\VSL\Debug\vsld.lib
+﻿  vsl.vcxproj -> C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\build\VSL\Debug\vsld.lib

@@ -169,13 +169,14 @@ int Tree::drawIntersection(TreeNode * node){
 }*/
 
 void Tree::rotL(TreeNode* node) {
-	
+	VSMathLib *vsml = VSMathLib::getInstance();
 	vsml->rotate(node->getDegree(), 1, 0, 0);
 	vsml->rotate(node->getDegree(), 0, 1, 0);
 	vsml->rotate(node->getDegree(), 0, 0, 1);
 }
 
 void Tree::rotR(TreeNode* node) {
+	VSMathLib *vsml = VSMathLib::getInstance();
 	vsml->rotate(-node->getDegree(), 1, 0, 0);
 	vsml->rotate(node->getDegree(), 0, 1, 0);
 	vsml->rotate(-node->getDegree(), 0, 0, 1);
