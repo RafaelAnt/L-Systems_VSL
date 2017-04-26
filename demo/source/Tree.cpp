@@ -4,7 +4,7 @@
 #include <vsl/vslibs.h>
 
 vector<Point3> currentPoints;
-
+Point3 last;
 
 Tree::Tree(){
 	start = TreeNode();
@@ -15,7 +15,7 @@ Tree::Tree(){
 	angleGrowthRate = -1;
 }
 
-Tree::Tree(string axiom, list<ProductionRule> prods,float maxLength, float maxWidth, float lengthGrowthRate, float widthGrowthRate, float angleGrowthRate, float angle, VSMathLib * vsml){
+Tree::Tree(string axiom, list<ProductionRule> prods,float maxLength, float maxWidth, float lengthGrowthRate, float widthGrowthRate, float angleGrowthRate, float angle){
 	productionRules = list<ProductionRule>(prods);
 	this->maxLength = maxLength;
 	this->maxWidth = maxWidth;
@@ -24,7 +24,7 @@ Tree::Tree(string axiom, list<ProductionRule> prods,float maxLength, float maxWi
 	this->angleGrowthRate = angleGrowthRate;
 	this->angle = angle;
 	TreeNode *aux;
-	this->vsml = vsml;
+	this->vsml = VSMathLib::getInstance();
 
 	char ch = axiom.at(0);
 	start = TreeNode(ch, nullptr);
@@ -114,19 +114,6 @@ int Tree::grow(int number){
 }
 
 int Tree::drawLine(TreeNode * node) {
-	/*glPushAttrib(GL_LIGHTING_BIT);//saves current lighting stuff
-
-	GLfloat ambient[4] = { 0.55f, 0.27f, 0.07f };    // ambient reflection
-	GLfloat specular[4] = { 0.55f, 0.27f, 0.07f };   // specular reflection
-	GLfloat diffuse[4] = { 0.55f, 0.27f, 0.07f };   // diffuse reflection
-
-	
-													// set the ambient reflection for the object
-	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambient);
-	// set the diffuse reflection for the object
-	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuse);
-	// set the specular reflection for the object      
-	//glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, specular);*/
 	VSModelLib linha;
 	VSPolyLine pp;
 	vector<Point3> points={
@@ -137,14 +124,6 @@ int Tree::drawLine(TreeNode * node) {
 	pp.setColor(VSResourceLib::EMISSIVE, 0, 1, 0, 1);
 	pp.render();
 	//glLineWidth(0.5);
-
-	/*glBegin(GL_LINES);
-		glVertex3f(0, 0, 0);
-		glVertex3f(0, node->getLength(), 0);
-	glEnd();*/
-	//glTranslatef(0, node->getLength(), 0);
-	
-	//glPopAttrib();
 
 	return TREE_DONE;
 }
@@ -157,26 +136,17 @@ int Tree::drawIntersection(TreeNode * node){
 		vssrl.createSphere(node->getWidth(), 7);
 		vssrl.setColor(VSResourceLib::EMISSIVE, 0, 1, 0, 1);
 		vssrl.render();
-		//glutSolidSphere(, 7, 7);
-		
 	}
 	return TREE_DONE;
 }
 
-/*int Tree::clearPoints(){
-	clearPoints(this.start);
-	return TREE_DONE;
-}*/
-
 void Tree::rotL(TreeNode* node) {
-	VSMathLib *vsml = VSMathLib::getInstance();
 	vsml->rotate(node->getDegree(), 1, 0, 0);
 	vsml->rotate(node->getDegree(), 0, 1, 0);
 	vsml->rotate(node->getDegree(), 0, 0, 1);
 }
 
 void Tree::rotR(TreeNode* node) {
-	VSMathLib *vsml = VSMathLib::getInstance();
 	vsml->rotate(-node->getDegree(), 1, 0, 0);
 	vsml->rotate(node->getDegree(), 0, 1, 0);
 	vsml->rotate(-node->getDegree(), 0, 0, 1);
@@ -237,34 +207,30 @@ bool isLastFromStage(TreeNode * current) {
 	return true;
 }
 
-Point3 last;
 
 int Tree::buildBranchPoints(TreeNode * current){ //TODO: check and fix!
 	
-	//glPushMatrix();
-	//glRotatef(-90, 1, 0, 0); //rotate the cone
-	//glutSolidCone(current->getWidth(), current->getLength(), 5, 5);
-
-
-	GLfloat modelMatrix[16];
-	glGetFloatv(GL_MODELVIEW_MATRIX, modelMatrix);
+	float* modelMatrix;
+	//glGetFloatv(GL_MODELVIEW_MATRIX, modelMatrix);
+	modelMatrix = vsml->get(VSMathLib::VIEW_MODEL);
 
 	//Point currentPoint = Point((float) modelMatrix[12], (float)modelMatrix[13], (float)modelMatrix[14]);
-	current->setCentralPoint((float)modelMatrix[12], (float)modelMatrix[13], (float)modelMatrix[14]);
+	current->setCentralPoint(modelMatrix[12],modelMatrix[13], modelMatrix[14]);
 		
 	//currentPoints.push_back(currentPoint);
 
 	// In order to draw the last one:
-	if (isLastFromStage(current) && current->getStage()== 1) {
+	if (isLastFromStage(current) && current->getStage() == 1) {
 		//glPushMatrix();
-		vsml->pushMatrix(VSMathLib::VIEW);
-		glTranslatef(0, current->getLength(), 0);
-		glGetFloatv(GL_MODELVIEW_MATRIX, modelMatrix);
-		last = Point3((float) modelMatrix[12], (float)modelMatrix[13], (float)modelMatrix[14]);
-		glPopMatrix();
+		vsml->pushMatrix(VSMathLib::MODEL);
+		vsml->translate(0, current->getLength(), 0);
+		modelMatrix = vsml->get(VSMathLib::VIEW_MODEL);
+		//glGetFloatv(GL_MODELVIEW_MATRIX, modelMatrix);
+		last = Point3(modelMatrix[12], modelMatrix[13], modelMatrix[14]);
+		vsml->popMatrix(VSMathLib::MODEL);
 	}
 	
-
+	// Draw the circle
 	/*glBegin(GL_TRIANGLE_STRIP);
 	for (float i = 0; i < 2 * 3.14; i += 0.5) {
 		//glColor3f(0.5, 0.5, 0.5);
@@ -280,6 +246,7 @@ int Tree::buildBranchPoints(TreeNode * current){ //TODO: check and fix!
 	glEnd();*/
 
 	//glPopMatrix();
+	//vsml->popMatrix(VSMathLib::VIEW);
 	
 	return TREE_DONE;
 }
@@ -290,13 +257,12 @@ int Tree::buildpoints(TreeNode* node) {
 	TreeNode* aux;
 	int r;
 
-	//Rotate if needed
 	switch (node->getType()){
 	case 'F':
 		if (node->getLength() > 0) {
-			//drawLine(node);
+			drawLine(node);
 			buildBranchPoints(node);
-			glTranslatef(0, node->getLength(), 0);
+			vsml->translate(0, node->getLength(), 0);
 			drawIntersection(node);
 		}
 		break;
@@ -319,16 +285,15 @@ int Tree::buildpoints(TreeNode* node) {
 		for (it = nodes.begin(); it != nodes.end(); it++) {
 			aux = *it;
 			if (aux->getStage() > node->getStage()) {
-				glPushMatrix();
+				vsml->pushMatrix(VSMathLib::MODEL);
 			}
 			r = buildpoints(aux);
 			if (r != TREE_DONE) return r;
 			if (aux->getStage() > node->getStage()) {
-				glPopMatrix();
+				vsml->popMatrix(VSMathLib::MODEL);
 			}
 		}
 	}
-
 
 	return TREE_DONE;
 }
@@ -358,51 +323,31 @@ int gatherPoints(TreeNode* current) {
 	return TREE_DONE;
 }
 
-/*Point findLastPointForCatmullrom(Point p1, Point p2) {
-	Point p = p2 - p1;
-	p = p2 + p;
-	return p;
-}*/
-
 int Tree::draw(){
 	VSCubicCurve cc;
-	
+	currentPoints.clear();
+
 	int r= buildpoints(&start);
 
 	//add imaginary first point;
 	currentPoints.push_back(Point3(0, -1, 0));
-	//gatherPoints(&start);
+	gatherPoints(&start);
+	currentPoints.push_back(last);
 	//add imaginary last point
-	if (currentPoints.size() > 2) {
-		//currentPoints.push_back(findLastPointForCatmullrom(currentPoints[currentPoints.size() - 2], currentPoints[currentPoints.size() - 1]));
 
+	vsml->loadIdentity(VSMathLib::MODEL);
+	vsml->loadIdentity(VSMathLib::VIEW);
+
+	if (currentPoints.size() > 4) {
+		cc.setType(VSCubicCurve::CATMULL_ROM);
+		cc.set(currentPoints, 8, false);
+		cc.setColor(VSResourceLib::EMISSIVE, 1, 0, 0, 1);
+		cc.render();
 	}
-	
 	else return TREE_NOT_ENOUGH_POINTS_FOR_CATMULLROM; //TODO fix
 
-	//vector<Point3> drawingPoints;//= catmullromPath(currentPoints, 8);
-	//cc.setType(VSCubicCurve::CATMULL_ROM);
-	//cc.set(currentPoints, 20, false);
-	//cc.setColor(VSResourceLib::EMISSIVE, 0,1,0,1);
-	//cc.render();
-
-	////glLoadIdentity();
-	//glLineWidth(0.5);
-	
-
-	//glVertex3f(0, 0, 0);
 	//if(currentPoints.size() > 0) printf("Last Point is: %f %f %f\n", currentPoints.back()->x, currentPoints.back()->y, currentPoints.back()->z);
 
-
-	/*glBegin(GL_LINE_STRIP);
-
-	for (int i = 0; i < (int)drawingPoints.size(); i++) {
-		glVertex3fv(drawingPoints[i].toVec3f());
-	}
-
-	glEnd();
-	drawingPoints.clear();*/
-	currentPoints.clear();
 	return r;
 }
 

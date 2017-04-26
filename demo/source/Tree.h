@@ -35,7 +35,7 @@ class Tree {
 
 public:
 	Tree();
-	Tree(string axiom, list<ProductionRule> prods, float maxLength, float maxWidth, float lengthGrowthRate, float widthGrowthRate, float angleGrowthRate, float angle, VSMathLib* vsml);
+	Tree(string axiom, list<ProductionRule> prods, float maxLength, float maxWidth, float lengthGrowthRate, float widthGrowthRate, float angleGrowthRate, float angle);
 
 	TreeNode getStart();
 	int setStart(TreeNode start);
@@ -53,7 +53,6 @@ public:
 	int grow(int number);
 	int draw();
 	string getLSystem();
-	//void teste();
 	int animate(double time);
 	int reset();
 
@@ -68,5 +67,4 @@ private:
 	int buildBranchPoints(TreeNode *current);
 	int drawLine(TreeNode *node);
 	int drawIntersection(TreeNode* node);
-	int clearPoints();
 };

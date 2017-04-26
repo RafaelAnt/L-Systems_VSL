@@ -272,21 +272,16 @@ int TreeNode::grow(list<ProductionRule> prodRule){
 }
 
 string TreeNode::getLSystem(){
-	//printf("TEST\n");
 	list<TreeNode*>::iterator it;
 	TreeNode* aux;
 	string r;
 	r += type;
 
 	if (nodes.size() == 0) {
-		//printf("0 Children\n");
 		return r;
 	}
 
 	if (nodes.size() >= 1) {
-
-		//printf("1 or more Children\n");
-		
 		for (it = nodes.begin(); it != nodes.end(); it++) {
 			aux = *it;
 			if (aux->getStage() > this->getStage()) {
@@ -296,9 +291,7 @@ string TreeNode::getLSystem(){
 			if (aux->getStage() > this->getStage()) {
 				r += ']';
 			}
-			
 		}
-
 	}
 	return r;
 }
@@ -315,9 +308,7 @@ int TreeNode::getBranchNumber(){
 		aux = *it;
 		if(aux->getType()=='F')	r++;
 		else r += aux->getBranchNumber();
-
 	}
-
 	return r;
 }
 

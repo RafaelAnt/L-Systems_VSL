@@ -23,7 +23,7 @@
 
 #define PI 3.1415
 #define EXPANSIONS_NUMBER 3
-#define GROUND_RADIUS 0.93f
+#define GROUND_RADIUS 3.0f
 
 
 
@@ -94,6 +94,7 @@ void changeSize(int w, int h) {
 		h = 1;
 
 	// Set the viewport to be the entire window
+	//TODO: CHECK!
 	glViewport(0, 0, w, h);
 
 	ratio = (1.0f * w) / h;
@@ -138,13 +139,13 @@ void renderScene(void) {
 			// render array of models
 			
 			vsml->pushMatrix(VSMathLib::MODEL);
-			vsml->scale(1.5f, 1.5f, 1.5f);
+			vsml->scale(GROUND_RADIUS, GROUND_RADIUS, GROUND_RADIUS);
 			vsml->translate(VSMathLib::MODEL, 0.0f, -0.65f, 0.0f);
 			vaseModel.render();
 			vsml->popMatrix(VSMathLib::MODEL);
 		
-			axis.render();
-			gridY.render();
+			//axis.render();
+			//gridY.render();
 
 			dirtModel.render();
 
@@ -443,7 +444,7 @@ int prepareDirtModel() {
 	std::string path = PATH_TO_FILES;
 	path += "textures/grass.jpg";
 
-	dirtModel.createCylinder(0.01f, GROUND_RADIUS, 20, 1);
+	dirtModel.createCylinder(0.01f, (GROUND_RADIUS+1)/2, 20, 1);
 	//dirtModel
 	//dirtModel.setColor(VSResourceLib::AMBIENT, (float) 58 / 256, (float) 40 / 256, (float) 24 / 256, 1);
 	
@@ -459,8 +460,8 @@ int prepareDirtModel() {
 /// </summary>
 /// <returns></returns>
 int init() {
-	axis.set(4, 0.01f);
-	gridY.set(VSGrid::Y, 10, 20);
+	axis.set(10, 0.02f);
+	gridY.set(VSGrid::Y, 100, 200);
 
 	prepareDirtModel();
 
@@ -479,10 +480,8 @@ int init() {
 		glEnable(GL_CULL_FACE);
 		glEnable(GL_MULTISAMPLE);
 		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-		//Clay color
+		//Clay color = { 0.65234375f, 0.3984375f, 0.140625f };
 		vaseModel.setColor(VSResourceLib::DIFFUSE, 0.65234375f, 0.3984375f, 0.140625f, 1);
-		//glClearColor(0.75f, 0.75f, 0.75f, 0.75f);
-		//glClearColor(0.25f, 0.25f, 0.25f, 0.25f);
 		return true;
 	}
 	else {
@@ -537,7 +536,7 @@ void glutMain(int argc, char** argv) {
 
 	glutInitWindowPosition(100, 100);
 	glutInitWindowSize(1280, 800);
-	glutCreateWindow("VSL Demo - LSystems Tree");
+	glutCreateWindow("LSystems Tree");
 
 	// Use depth buffering for hidden surface elimination.
 	glEnable(GL_DEPTH_TEST);
@@ -642,8 +641,8 @@ int main(int argc, char **argv) {
 
 	degree = parser.getDegree();
 
-	//			 Axiom					production Rules,				maxLenght,	 maxWidth,	length rate,	width rate,		degree rate,	maxDegree;		VSMathLib;
-	plant = Tree(parser.getAxiom(),		parser.getProductionRules(),	1.1f,		 0.25f,		0.01f,			0.0001f,		0.07f,			degree,			vsml		);
+	//			 Axiom					production Rules,				maxLenght,	 maxWidth,	length rate,	width rate,		degree rate,	maxDegree;
+	plant = Tree(parser.getAxiom(),		parser.getProductionRules(),	1.1f,		 0.25f,		0.01f,			0.0001f,		0.07f,			degree);
 	
 	r = plant.grow(EXPANSIONS_NUMBER);
 	if (r != TREE_DONE) {
