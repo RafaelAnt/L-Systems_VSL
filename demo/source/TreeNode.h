@@ -16,6 +16,11 @@ using namespace std;
 #define TREE_NODE_INVALID_PRODUCTION_RULE 302
 #define TREE_NODE_UNDIFINED_SYMBOL 303
 #define TREE_NODE_NULL_POINT 304
+#define TREE_NODE_TYPE_TURN_RIGHT 305
+#define TREE_NODE_TYPE_TURN_LEFT 306
+#define TREE_NODE_TYPE_BRANCH 307
+#define TREE_NODE_TYPE_ERROR 308
+
 
 
 class TreeNode {
@@ -38,7 +43,7 @@ public:
 	TreeNode(char type, TreeNode* father, int stage);
 	TreeNode(const TreeNode & node);
 
-	char getType();
+	int getType();
 	float getWidth();
 	int setWidth(float newWidth);
 	float getLength();

@@ -64,8 +64,19 @@ TreeNode::TreeNode(const TreeNode &node) {
 	this->father = node.father;
 }
 
-char TreeNode::getType(){
-	return type;
+int TreeNode::getType(){
+	switch (type){
+	case 'F':
+	case 'X':
+		return TREE_NODE_TYPE_BRANCH;
+	case '-':
+		return TREE_NODE_TYPE_TURN_LEFT;
+	case '+':
+		return TREE_NODE_TYPE_TURN_RIGHT;
+	default:
+		return TREE_NODE_TYPE_ERROR;
+	}
+
 }
 
 float TreeNode::getWidth(){
@@ -177,7 +188,8 @@ int TreeNode::grow(list<ProductionRule> prodRule){
 
 	//printf("Growing %c...\n", type);
 
-	if (this->getType() == '+' || this->getType() == '-') {
+	// Do not grow auxiliary nodes, such as - and +
+	if (this->getType() == TREE_NODE_TYPE_TURN_LEFT || this->getType() == TREE_NODE_TYPE_TURN_RIGHT) {
 
 		for (tnIt = this->nodes.begin(); tnIt != this->nodes.end(); tnIt++) {
 			aux = *tnIt;
@@ -188,6 +200,7 @@ int TreeNode::grow(list<ProductionRule> prodRule){
 	}
 	else {
 
+		// Save Old Nodes
 		if (!this->nodes.empty()) {
 			//printf("\tSaving old nodes...\n");
 			old = list<TreeNode*>(this->nodes);
@@ -221,6 +234,12 @@ int TreeNode::grow(list<ProductionRule> prodRule){
 		for (sIt = result.begin() + 1; sIt != result.end(); sIt++) {
 			char c = *sIt;
 			switch (c) {
+			case 'X':
+				aux = new TreeNode('X', current, stageMod);
+				current->addNode(aux);
+				current = aux;
+				break;
+
 			case 'F':
 				aux = new TreeNode('F', current, stageMod);
 				current->addNode(aux);
@@ -306,7 +325,7 @@ int TreeNode::getBranchNumber(){
 
 	for (it = nodes.begin(); it != nodes.end(); it++) {
 		aux = *it;
-		if(aux->getType()=='F')	r++;
+		if(aux->getType() == TREE_NODE_TYPE_BRANCH)	r++;
 		else r += aux->getBranchNumber();
 	}
 	return r;

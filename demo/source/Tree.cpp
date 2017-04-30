@@ -197,8 +197,8 @@ bool isLastFromStage(TreeNode * current) {
 	for (it = nodes.begin(); it != nodes.end(); it++) {
 		aux = *it;
 		if (aux->getStage() == stage) {
-			if (aux->getType() == 'F' && aux->getLength() > 0) return false;
-			if ((aux->getType() == '+' || aux->getType() == '-')) {
+			if (aux->getType() == TREE_NODE_TYPE_BRANCH && aux->getLength() > 0) return false;
+			if (aux->getType() == TREE_NODE_TYPE_TURN_LEFT || aux->getType() == TREE_NODE_TYPE_TURN_RIGHT){
 				if (!isLastFromStage(aux)) return false;
 			}
 		}
@@ -208,16 +208,12 @@ bool isLastFromStage(TreeNode * current) {
 }
 
 
-int Tree::buildBranchPoints(TreeNode * current){ //TODO: check and fix!
+int Tree::buildContralPoints(TreeNode * current){
 	
 	float* modelMatrix;
-	//glGetFloatv(GL_MODELVIEW_MATRIX, modelMatrix);
 	modelMatrix = vsml->get(VSMathLib::VIEW_MODEL);
 
-	//Point currentPoint = Point((float) modelMatrix[12], (float)modelMatrix[13], (float)modelMatrix[14]);
 	current->setCentralPoint(modelMatrix[12],modelMatrix[13], modelMatrix[14]);
-		
-	//currentPoints.push_back(currentPoint);
 
 	// In order to draw the last one:
 	if (isLastFromStage(current) && current->getStage() == 1) {
@@ -225,19 +221,22 @@ int Tree::buildBranchPoints(TreeNode * current){ //TODO: check and fix!
 		vsml->pushMatrix(VSMathLib::MODEL);
 		vsml->translate(0, current->getLength(), 0);
 		modelMatrix = vsml->get(VSMathLib::VIEW_MODEL);
-		//glGetFloatv(GL_MODELVIEW_MATRIX, modelMatrix);
 		last = Point3(modelMatrix[12], modelMatrix[13], modelMatrix[14]);
 		vsml->popMatrix(VSMathLib::MODEL);
 	}
 	
+	return TREE_DONE;
+}
+
+int Tree::buildCirclePoints(TreeNode * current) {
 	// Draw the circle
 	/*glBegin(GL_TRIANGLE_STRIP);
 	for (float i = 0; i < 2 * 3.14; i += 0.5) {
-		//glColor3f(0.5, 0.5, 0.5);
-		glNormal3f(sin(i),0.0,cos(i));
-		glVertex3f(current->getWidth()*sin(i)s, current->getLength(), current->getWidth()*cos(i));
-		glNormal3f(sin(i), 0.0, cos(i));
-		glVertex3f(current->getWidth()*sin(i), 0, current->getWidth()*cos(i));
+	//glColor3f(0.5, 0.5, 0.5);
+	glNormal3f(sin(i),0.0,cos(i));
+	glVertex3f(current->getWidth()*sin(i)s, current->getLength(), current->getWidth()*cos(i));
+	glNormal3f(sin(i), 0.0, cos(i));
+	glVertex3f(current->getWidth()*sin(i), 0, current->getWidth()*cos(i));
 	}
 	glNormal3f(sin(0), 0.0, cos(0));
 	glVertex3f(current->getWidth()*sin(0.0), current->getLength(), current->getWidth()*cos(0.0));
@@ -247,7 +246,6 @@ int Tree::buildBranchPoints(TreeNode * current){ //TODO: check and fix!
 
 	//glPopMatrix();
 	//vsml->popMatrix(VSMathLib::VIEW);
-	
 	return TREE_DONE;
 }
 
@@ -258,20 +256,24 @@ int Tree::buildpoints(TreeNode* node) {
 	int r;
 
 	switch (node->getType()){
-	case 'F':
+	case TREE_NODE_TYPE_BRANCH:
 		if (node->getLength() > 0) {
 			drawLine(node);
-			buildBranchPoints(node);
+			buildContralPoints(node);
+			buildCirclePoints(node);
 			vsml->translate(0, node->getLength(), 0);
 			drawIntersection(node);
 		}
 		break;
-	case '+':
+	case TREE_NODE_TYPE_TURN_RIGHT:
 		rotR(node);
 		break;
-	case '-':
+	case TREE_NODE_TYPE_TURN_LEFT:
 		rotL(node);
 		break;
+	case TREE_NODE_TYPE_ERROR:
+		assert("Unexpected Tree Node Type!");
+		return TREE_ERROR;
 	default:
 		break;
 	}
@@ -306,7 +308,7 @@ int gatherPoints(TreeNode* current) {
 
 	// main stage so far...
 	if (current->getStage() == 1 && current->getLength()>0) {
-		if (current->getType() == 'F') {
+		if (current->getType() == TREE_NODE_TYPE_BRANCH && current->getBranchNumber()>2) {
 			currentPoints.push_back(current->getCentralPoint());
 		}
 		
@@ -316,10 +318,10 @@ int gatherPoints(TreeNode* current) {
 		for (it = nodes.begin(); it != nodes.end(); it++) {
 			gatherPoints(*it);
 		}
+		//Add imaginary last point.
 		currentPoints.push_back(last);
 	}
 
-	//last = { 0, 0, 0 };
 	return TREE_DONE;
 }
 
@@ -332,8 +334,6 @@ int Tree::draw(){
 	//add imaginary first point;
 	currentPoints.push_back(Point3(0, -1, 0));
 	gatherPoints(&start);
-	currentPoints.push_back(last);
-	//add imaginary last point
 
 	vsml->loadIdentity(VSMathLib::MODEL);
 	vsml->loadIdentity(VSMathLib::VIEW);

@@ -16,6 +16,7 @@
 #define TREE_MAX_WIDTH_REACHED 203
 #define TREE_MAX_ANGLE_REACHED 204
 #define TREE_NOT_ENOUGH_POINTS_FOR_CATMULLROM 205
+#define TREE_ERROR 206
 
 
 #define TREE_BRANCH_POINTS 8
@@ -58,13 +59,17 @@ public:
 
 
 private:
-	int buildpoints(TreeNode* node);
+	
 	void rotL(TreeNode* node);
 	void rotR(TreeNode* node);
 	int incrementLength(TreeNode *current);
 	int incrementWidth(TreeNode *current);
 	int incrementDegree(TreeNode *current);
-	int buildBranchPoints(TreeNode *current);
+
+	int buildpoints(TreeNode* node);
+	int buildContralPoints(TreeNode *current);
+	int buildCirclePoints(TreeNode *current);
+	
 	int drawLine(TreeNode *node);
 	int drawIntersection(TreeNode* node);
 };
