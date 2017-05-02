@@ -114,7 +114,6 @@ int Tree::grow(int number){
 }
 
 int Tree::drawLine(TreeNode * node) {
-	VSModelLib linha;
 	VSPolyLine pp;
 	vector<Point3> points={
 		Point3(0,0,0),
@@ -123,7 +122,6 @@ int Tree::drawLine(TreeNode * node) {
 	pp.set(points);
 	pp.setColor(VSResourceLib::EMISSIVE, 0, 1, 0, 1);
 	pp.render();
-	//glLineWidth(0.5);
 
 	return TREE_DONE;
 }
@@ -141,16 +139,31 @@ int Tree::drawIntersection(TreeNode * node){
 }
 
 void Tree::rotL(TreeNode* node) {
-	vsml->rotate(node->getDegree(), 1, 0, 0);
+	//vsml->rotate(node->getDegree(), 1, 0, 0);
 	vsml->rotate(node->getDegree(), 0, 1, 0);
-	vsml->rotate(node->getDegree(), 0, 0, 1);
+	//vsml->rotate(node->getDegree(), 0, 0, 1);
 }
 
 void Tree::rotR(TreeNode* node) {
-	vsml->rotate(-node->getDegree(), 1, 0, 0);
-	vsml->rotate(node->getDegree(), 0, 1, 0);
-	vsml->rotate(-node->getDegree(), 0, 0, 1);
+	//vsml->rotate(-node->getDegree(), 1, 0, 0);
+	vsml->rotate(-node->getDegree(), 0, 1, 0);
+	//vsml->rotate(-node->getDegree(), 0, 0, 1);
 }
+
+void Tree::switchL(TreeNode* node) {
+	vsml->rotate(node->getDegree(), 1, 0, 0);
+	//vsml->rotate(node->getDegree(), 0, 1, 0);
+	//vsml->rotate(node->getDegree(), 0, 0, 1);
+}
+
+void Tree::switchR(TreeNode* node) {
+	vsml->rotate(-node->getDegree(), 1, 0, 0);
+	//vsml->rotate(-node->getDegree(), 0, 1, 0);
+	//vsml->rotate(-node->getDegree(), 0, 0, 1);
+}
+
+
+
 
 int Tree::incrementLength(TreeNode *current){
 	float l = current->getLength();
@@ -271,10 +284,14 @@ int Tree::buildpoints(TreeNode* node) {
 	case TREE_NODE_TYPE_TURN_LEFT:
 		rotL(node);
 		break;
-	case TREE_NODE_TYPE_ERROR:
-		assert("Unexpected Tree Node Type!");
-		return TREE_ERROR;
+	case TREE_NODE_TYPE_SWITCH_RIGHT:
+		switchR(node);
+		break;
+	case TREE_NODE_TYPE_SWITCH_LEFT:
+		switchL(node);
+		break;
 	default:
+		assert("Unexpected Tree Node Type!" && false);
 		break;
 	}
 
@@ -344,7 +361,7 @@ int Tree::draw(){
 		cc.setColor(VSResourceLib::EMISSIVE, 1, 0, 0, 1);
 		cc.render();
 	}
-	else return TREE_NOT_ENOUGH_POINTS_FOR_CATMULLROM; //TODO fix
+	else return TREE_NOT_ENOUGH_POINTS_FOR_CATMULLROM; 
 
 	//if(currentPoints.size() > 0) printf("Last Point is: %f %f %f\n", currentPoints.back()->x, currentPoints.back()->y, currentPoints.back()->z);
 

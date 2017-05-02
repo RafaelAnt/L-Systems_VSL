@@ -23,6 +23,9 @@
 
 #define PI 3.1415
 #define EXPANSIONS_NUMBER 3
+// INITIAL -> For the initial rotation system, with only 1 angle. - UNAVAILABLE
+// SPHERIC -> For the new rotation systems, using spheric coordinates.
+#define ROTATION_SYSTEM SPHERIC // Unused...
 #define GROUND_RADIUS 3.0f
 
 
@@ -153,7 +156,7 @@ void renderScene(void) {
 			int result;
 			result = plant.draw();
 			if (result != TREE_DONE && result != TREE_NOT_ENOUGH_POINTS_FOR_CATMULLROM) {
-				printf("Fatal Error: %d\n", result);
+				std::printf("Fatal Error: %d\n", result);
 				exit(0);
 			}
 
@@ -216,7 +219,7 @@ void animate() {
 	int r = plant.animate(elapsedTime);
 
 	if (r != TREE_DONE && r != TREE_NOT_ENOUGH_POINTS_FOR_CATMULLROM) {
-		printf("Fatal Error: %d\n", r);
+		std::printf("Fatal Error: %d\n", r);
 		exit(0);
 	}
 
@@ -235,7 +238,7 @@ void processKeys(unsigned char key, int xx, int yy){
 
 	switch (key) {
 	case 'q':
-		printf("\nThe End!\n");
+		std::printf("\nThe End!\n");
 		glutLeaveMainLoop();
 		break;
 	case 'w': r -= 0.1f;
@@ -642,21 +645,11 @@ int main(int argc, char **argv) {
 	degree = parser.getDegree();
 
 	//			 Axiom					production Rules,				maxLenght,	 maxWidth,	length rate,	width rate,		degree rate,	maxDegree;
-	plant = Tree(parser.getAxiom(),		parser.getProductionRules(),	1.1f,		 0.25f,		0.01f,			0.0001f,		0.07f,			degree);
+	plant = Tree(parser.getAxiom(),		parser.getProductionRules(),	1.0f,		 0.15f,		0.1f,			0.0001f,		0.7f,			degree);
 	
 	r = plant.grow(EXPANSIONS_NUMBER);
 	if (r != TREE_DONE) {
-		switch (r){
-		case (TREE_NODE_INVALID_PRODUCTION_RULE):
-			printf("TREE_NODE_INVALID_PRODUCTION_RULE!!!!\n");
-			break;
-		case (TREE_NODE_UNDIFINED_SYMBOL):
-			printf("TREE_NODE_UNDIFINED_SYMBOL!!!!\n");
-			break;
-		default:
-			printf("ERROR GROWING !!\n");
-			break;
-		}
+		printf("ERROR GROWING !!\n");
 	}
 
 	string aux = plant.getLSystem();

@@ -3370,7 +3370,7 @@ Prepare matrices for rendering at (x,y) window coordinates
 <member name="M:VSFontLib.restoreRender" decl="true" source="c:\users\rafael\documents\github\l-systems_vsl\vsl\include\vsl\vsfontlib.h" line="194">
 Restore the original matrices prior to prepareRender
 </member>
-<member name="M:Tree.reset" decl="false" source="c:\users\rafael\documents\github\l-systems_vsl\demo\source\tree.cpp" line="428">
+<member name="M:Tree.reset" decl="false" source="c:\users\rafael\documents\github\l-systems_vsl\demo\source\tree.cpp" line="405">
 <summary>
 Resets the tree to its basic form.
 </summary>

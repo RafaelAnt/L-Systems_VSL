@@ -73,8 +73,12 @@ int TreeNode::getType(){
 		return TREE_NODE_TYPE_TURN_LEFT;
 	case '+':
 		return TREE_NODE_TYPE_TURN_RIGHT;
+	case '/':
+		return TREE_NODE_TYPE_SWITCH_LEFT;
+	case '*':
+		return TREE_NODE_TYPE_SWITCH_RIGHT;
 	default:
-		return TREE_NODE_TYPE_ERROR;
+		assert("TREE_NODE_TYPE_ERROR: unknown type" && false);
 	}
 
 }
@@ -84,9 +88,7 @@ float TreeNode::getWidth(){
 }
 
 int TreeNode::setWidth(float newWidth){
-	if (newWidth <= 0) {
-		return TREE_NODE_INVALID_VALUE;
-	}
+	assert("TREE_NODE_INVALID_VALUE: newWidth" && newWidth >= 0);
 	width = newWidth;
 	return TREE_NODE_DONE;
 }
@@ -96,9 +98,7 @@ float TreeNode::getLength(){
 }
 
 int TreeNode::setLength(float newLength){
-	if (newLength <= 0) {
-		return TREE_NODE_INVALID_VALUE;
-	}
+	assert("TREE_NODE_INVALID_VALUE: newLength" && newLength >= 0);
 	length = newLength;
 	return TREE_NODE_DONE;
 }
@@ -117,9 +117,7 @@ int TreeNode::getStage(){
 }
 
 int TreeNode::setStage(int newStage){
-	if (newStage < 0) {
-		return TREE_NODE_INVALID_VALUE;
-	}
+	assert("TREE_NODE_INVALID_VALUE: newStage" && newStage <= 0);
 	stage = newStage;
 	return TREE_NODE_DONE;
 }
@@ -170,7 +168,7 @@ TreeNode * TreeNode::getFather(){
 }
 
 int TreeNode::setFather(TreeNode * newFather){
-	if (newFather == nullptr) return TREE_NODE_INVALID_VALUE;
+	assert("TREE_NODE_INVALID_VALUE: newFather" && newFather == nullptr && newFather == NULL);
 	this->father = newFather;
 	return TREE_NODE_DONE;
 }
@@ -188,8 +186,11 @@ int TreeNode::grow(list<ProductionRule> prodRule){
 
 	//printf("Growing %c...\n", type);
 
-	// Do not grow auxiliary nodes, such as - and +
-	if (this->getType() == TREE_NODE_TYPE_TURN_LEFT || this->getType() == TREE_NODE_TYPE_TURN_RIGHT) {
+	// Do not grow auxiliary nodes, such as - + * / 
+	if (this->getType() == TREE_NODE_TYPE_TURN_LEFT 
+		|| this->getType() == TREE_NODE_TYPE_TURN_RIGHT
+		|| this->getType() == TREE_NODE_TYPE_SWITCH_RIGHT
+		|| this->getType() == TREE_NODE_TYPE_SWITCH_LEFT) {
 
 		for (tnIt = this->nodes.begin(); tnIt != this->nodes.end(); tnIt++) {
 			aux = *tnIt;
@@ -217,13 +218,8 @@ int TreeNode::grow(list<ProductionRule> prodRule){
 				break;
 			}
 		}
-
-		if (result.size() == 0) {
-			return TREE_NODE_INVALID_PRODUCTION_RULE;
-		}
-		else {
-			//printf("\tFound.\n");
-		}
+	
+		assert("TREE_NODE_INVALID_PRODUCTION_RULE" && result.size() > 0);
 
 		if (result.at(0) != this->type) {
 			//printf("\tChanging my type to %c...\n", result.at(0));
@@ -259,6 +255,18 @@ int TreeNode::grow(list<ProductionRule> prodRule){
 				current = aux;
 				break;
 
+			case '*':
+				aux = new TreeNode('*', current, stageMod);
+				current->addNode(aux);
+				current = aux;
+				break;
+
+			case '/':
+				aux = new TreeNode('/', current, stageMod);
+				current->addNode(aux);
+				current = aux;
+				break;
+
 			case '[':
 				//printf("\t\t[\n");
 				goBackTo = current;
@@ -272,7 +280,7 @@ int TreeNode::grow(list<ProductionRule> prodRule){
 				break;
 
 			default:
-				return TREE_NODE_UNDIFINED_SYMBOL;
+				assert("TREE_NODE_UNDIFINED_SYMBOL" && true);
 			}
 		}
 

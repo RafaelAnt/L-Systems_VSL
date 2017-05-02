@@ -1,16 +1,22 @@
 % No BLANK Spaces Allowed!!!
+% Pinheiro. Original: X=F[+X][-X]FX
+% '/' and '*' -> alpha in circular coordinates
+% '-' and '+' -> beta in circular coordinates (height)
 
 #AXIOM
 X
 #DEGREES
 30
 #PRODUCTION
-X=F[+X][-X]FX
+X=F[---//X][---**X][//X][**X]FX
 F=FF
 #END
 
 
 
+
+
+% Maple Tree
 #AXIOM
 FX
 #DEGREES

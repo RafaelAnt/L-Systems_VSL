@@ -55,6 +55,7 @@ int Parser::setFile(string file) {
 	this->file = file;
 	fopen_s(&f,file.c_str(), "r");
 	if (f == NULL) {
+		//assert("PARSER_FILE_NOT_FOUND" && f != NULL);
 		return PARSER_FILE_NOT_FOUND;
 	}
 	return PARSER_DONE;
@@ -115,6 +116,7 @@ int Parser::parse() {
 
 	if (f == NULL) return PARSER_FILE_NOT_FOUND;
 	
+	
 	while (fgets(buf, sizeof buf, f) != NULL) {
 		//printf("FRASE ORIGINAL: %s\n", buf);
 		token = strtok_s(buf, seps, &nextToken);
@@ -123,7 +125,7 @@ int Parser::parse() {
 		while (token != NULL){
 			//printf("ENTREI AQUI\n");
 			if (token[0] == '%') {
-				//printf("COMMENT DETETADO\n");
+				//printf("COMMENT DETECTED\n");
 				break;
 			}
 			if (strcmp(token, "#AXIOM") == 0) {
@@ -272,7 +274,7 @@ string Parser::expand(int n){
 bool Parser::hasInvalidChar(int type, char* string) {
 	int i = 0;
 	char axiomValidChars[] = "QWERTYUIOPASDFGHJKLZXCVBNM-+";
-	char productionValidChars[] = "QWERTYUIOPASDFGHJKLZXCVBNM-+[]=";
+	char productionValidChars[] = "QWERTYUIOPASDFGHJKLZXCVBNM-+[]=*/";
 
 	//printf("%s\n", &string[0]);
 
