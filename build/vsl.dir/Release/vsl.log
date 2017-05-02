@@ -1,2 +1,5 @@
-﻿  vsGeometryLib.cpp
+﻿  vsModelLib.cpp
+C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\source\vsModelLib.cpp(866): warning C4018: '>=': signed/unsigned mismatch
+  vsSurfRevLib.cpp
+  Generating Code...
   vsl.vcxproj -> C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\build\VSL\Release\vsl.lib

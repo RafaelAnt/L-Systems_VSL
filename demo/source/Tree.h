@@ -62,6 +62,8 @@ private:
 	
 	void rotL(TreeNode* node);
 	void rotR(TreeNode* node);
+	void switchL(TreeNode* node);
+	void switchR(TreeNode* node);
 	int incrementLength(TreeNode *current);
 	int incrementWidth(TreeNode *current);
 	int incrementDegree(TreeNode *current);

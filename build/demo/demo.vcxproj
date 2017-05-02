@@ -321,7 +321,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\demo\source\Bezier.h" />
     <ClInclude Include="..\..\demo\source\Parser.h" />
     <ClInclude Include="..\..\demo\source\Point.h" />
     <ClInclude Include="..\..\demo\source\ProductionRule.h" />
@@ -353,7 +352,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\demo\source\Bezier.cpp" />
     <ClCompile Include="..\..\demo\source\Main.cpp" />
     <ClCompile Include="..\..\demo\source\Parser.cpp" />
     <ClCompile Include="..\..\demo\source\Point.cpp" />

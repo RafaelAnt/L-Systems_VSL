@@ -2,6 +2,7 @@
 #include <iostream>
 #include <list>
 #include <stdio.h>
+#include <assert.h>
 
 #include "ProductionRule.h"
 
