@@ -321,7 +321,7 @@ int Tree::buildpoints(TreeNode* node) {
 	case TREE_NODE_TYPE_BRANCH:
 		if (node->getLength() > 0) {
 			drawLine(node);
-			drawBark(node);
+			//drawBark(node);
 			buildContralPoints(node);
 			buildCirclePoints(node);
 			vsml->translate(0, node->getLength(), 0);
