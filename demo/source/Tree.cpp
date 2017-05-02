@@ -114,6 +114,7 @@ int Tree::grow(int number){
 }
 
 int Tree::drawLine(TreeNode * node) {
+	assert("TreeNode Is Null" && node != NULL);
 	VSPolyLine pp;
 	vector<Point3> points={
 		Point3(0,0,0),
@@ -126,6 +127,38 @@ int Tree::drawLine(TreeNode * node) {
 	return TREE_DONE;
 }
 
+int drawBark(TreeNode * node) {
+	assert("TreeNode Is Null" && node != NULL);
+
+	VSSurfRevLib bark;
+	TreeNode *father = node->getFather();
+
+	if (father == NULL) return TREE_DONE;
+
+	while (father->getType() != TREE_NODE_TYPE_BRANCH) {
+		father = father->getFather();
+		if (father == NULL) return TREE_DONE;
+	}
+	
+	float points[8];
+	points[0] = 0;
+	points[1] = 0;
+
+	points[2] = father->getWidth();
+	points[3] = 0;
+
+	points[4] = node->getWidth();
+	points[5] = node->getLength();
+
+	points[6] = 0;
+	points[7] = node->getLength();
+
+	bark.create(points, 4, 10, 1, 1.0f);
+	bark.setColor(VSResourceLib::EMISSIVE, 0, 0, 1, 0);
+	bark.render();
+
+	return TREE_DONE;
+}
 
 int Tree::drawIntersection(TreeNode * node){
 	VSSurfRevLib vssrl;
@@ -138,24 +171,40 @@ int Tree::drawIntersection(TreeNode * node){
 	return TREE_DONE;
 }
 
+/// <summary>
+/// Rotates the tree node "node->getDegree()" degrees in relation to the Y axis. Controls the height or beta angle on spheric coordinates.
+/// </summary>
+/// <param name="node">The Tree Node to be rotated.</param>
 void Tree::rotL(TreeNode* node) {
 	//vsml->rotate(node->getDegree(), 1, 0, 0);
 	vsml->rotate(node->getDegree(), 0, 1, 0);
 	//vsml->rotate(node->getDegree(), 0, 0, 1);
 }
 
+/// <summary>
+/// Rotates the tree node "-node->getDegree()" degrees in relation to the Y axis.  Controls the height or beta angle on spheric coordinates.
+/// </summary>
+/// <param name="node">The Tree Node to be rotated.</param>
 void Tree::rotR(TreeNode* node) {
 	//vsml->rotate(-node->getDegree(), 1, 0, 0);
 	vsml->rotate(-node->getDegree(), 0, 1, 0);
 	//vsml->rotate(-node->getDegree(), 0, 0, 1);
 }
 
+/// <summary>
+/// Rotates the tree node "node->getDegree()" degrees in relation to the X axis.  Controls the direction or alpha angle on spheric coordinates.
+/// </summary>
+/// <param name="node">The Tree Node to be rotated.</param>
 void Tree::switchL(TreeNode* node) {
 	vsml->rotate(node->getDegree(), 1, 0, 0);
 	//vsml->rotate(node->getDegree(), 0, 1, 0);
 	//vsml->rotate(node->getDegree(), 0, 0, 1);
 }
 
+/// <summary>
+/// Rotates the tree node "-node->getDegree()" degrees in relation to the X axis.  Controls the direction or alpha angle on spheric coordinates.
+/// </summary>
+/// <param name="node">The Tree Node to be rotated.</param>
 void Tree::switchR(TreeNode* node) {
 	vsml->rotate(-node->getDegree(), 1, 0, 0);
 	//vsml->rotate(-node->getDegree(), 0, 1, 0);
@@ -272,6 +321,7 @@ int Tree::buildpoints(TreeNode* node) {
 	case TREE_NODE_TYPE_BRANCH:
 		if (node->getLength() > 0) {
 			drawLine(node);
+			drawBark(node);
 			buildContralPoints(node);
 			buildCirclePoints(node);
 			vsml->translate(0, node->getLength(), 0);

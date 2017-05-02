@@ -163,7 +163,12 @@ int TreeNode::setCirclePoints(vector<Point3> points){
 	return TREE_NODE_DONE;
 }
 
-TreeNode * TreeNode::getFather(){
+
+/// <summary>
+/// Gets the father of this node. Can be null.
+/// </summary>
+/// <returns></returns>
+TreeNode * TreeNode::getFather() {
 	return father;
 }
 

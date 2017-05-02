@@ -50,7 +50,7 @@ GLuint counterQ;
 unsigned int primitiveCounter = 0;
 
 // Camera Position
-float camX = 0, camY = 0, camZ = 5;
+float camX = 0, camY = 15, camZ = 25;
 float eyeX = 0;
 float eyeY = 0;
 float eyeZ = 0;
@@ -645,7 +645,7 @@ int main(int argc, char **argv) {
 	degree = parser.getDegree();
 
 	//			 Axiom					production Rules,				maxLenght,	 maxWidth,	length rate,	width rate,		degree rate,	maxDegree;
-	plant = Tree(parser.getAxiom(),		parser.getProductionRules(),	1.0f,		 0.15f,		0.1f,			0.0001f,		0.7f,			degree);
+	plant = Tree(parser.getAxiom(),		parser.getProductionRules(),	1.0f,		 0.15f,		0.1f,			0.001f,			0.7f,			degree);
 	
 	r = plant.grow(EXPANSIONS_NUMBER);
 	if (r != TREE_DONE) {
