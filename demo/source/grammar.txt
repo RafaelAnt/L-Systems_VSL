@@ -9,7 +9,7 @@ FX
 #DEGREES
 25
 #PRODUCTION
-F=FF-/[-/F-*F]+*[-*F-/F]
+F=FF-/[-/F-*F]-*[-*F-/F]
 X=FF-*[-*F]-*[-/F]
 #END
 

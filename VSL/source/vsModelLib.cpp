@@ -838,7 +838,7 @@ VSModelLib::addCubeMapTexture(unsigned int unit, std::string posX, std::string n
 /// <summary>
 /// Adds the mesh.
 /// </summary>
-/// <param name="nump">The nump.</param>
+/// <param name="nump">The number of points.</param>
 /// <param name="p">The points.</param>
 /// <param name="n">The normals.</param>
 /// <param name="tc">The tc.</param>

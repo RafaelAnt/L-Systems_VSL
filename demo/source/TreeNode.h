@@ -28,6 +28,7 @@ class TreeNode {
 	int stage;
 	list<TreeNode*> nodes;
 	Point3 centralPoint;
+	Point3 growthDirection;
 	vector<Point3> circlePoints;
 	TreeNode *father;
 	float color[3];
@@ -56,6 +57,11 @@ public:
 	Point3 getCentralPoint();
 	int setCentralPoint(Point3 p);
 	int setCentralPoint(float x, float y, float z);
+
+	Point3 getGrowthDirection();
+	int setGrowthDirection(Point3 p);
+	int setGrowthDirection(float x, float y, float z);
+
 	vector<Point3> getCirclePoints();
 	int setCirclePoints(vector<Point3> points);
 	TreeNode* getFather();

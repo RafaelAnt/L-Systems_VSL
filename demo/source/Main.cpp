@@ -52,8 +52,8 @@ unsigned int primitiveCounter = 0;
 // Camera Position
 float camX = 0, camY = 15, camZ = 25;
 float eyeX = 0;
-float eyeY = 0;
-float eyeZ = 0;
+float eyeY = 15;
+float eyeZ = 25;
 float lookX = 0;
 float lookY = 0;
 float lookZ = 0;

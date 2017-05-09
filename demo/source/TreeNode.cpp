@@ -154,6 +154,20 @@ int TreeNode::setCentralPoint(float x, float y, float z){
 	return TREE_NODE_DONE;
 }
 
+Point3 TreeNode::getGrowthDirection(){
+	return growthDirection;
+}
+
+int TreeNode::setGrowthDirection(Point3 p){
+	growthDirection = p;
+	return TREE_NODE_DONE;
+}
+
+int TreeNode::setGrowthDirection(float x, float y, float z){
+	growthDirection = Point3(x, y, z);
+	return TREE_NODE_DONE;
+}
+
 vector<Point3> TreeNode::getCirclePoints(){
 	return circlePoints;
 }

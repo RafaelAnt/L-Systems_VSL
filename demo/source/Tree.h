@@ -12,7 +12,7 @@
 #include "Point.h"
 #include "Bezier.h"
 
-
+#define PI 3.1415
 
 #define TREE_DONE 200
 #define TREE_INVALID_VALUE 201
@@ -75,6 +75,8 @@ private:
 	int buildpoints(TreeNode* node);
 	int buildContralPoints(TreeNode *current);
 	int buildCirclePoints(TreeNode *current);
+
+	int drawLeaves(TreeNode * current);
 	
 	int drawLine(TreeNode *node);
 	int drawIntersection(TreeNode* node);

@@ -124,9 +124,21 @@ public:
 		x = 0.0f; y = 0.0f; z = 0.0f;
 	};
 
+	// CHANGES MADE FOR L-SYSTEMS PROJECT BY: Rafael Antunes.
+
 	float * Point3::toVec3f() {
 		float vec[3] = { x, y, z };
 		return vec;
+	}
+
+	Point3 Point3::operator*(float num) {
+		Point3 p(x * num, y * num, z * num);
+		return p;
+	}
+
+	Point3 Point3::operator/(float num) {
+		Point3 p(x / num, y / num, z / num);
+		return p;
 	}
 };
 

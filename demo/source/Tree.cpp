@@ -276,10 +276,10 @@ int Tree::buildContralPoints(TreeNode * current){
 	modelMatrix = vsml->get(VSMathLib::VIEW_MODEL);
 
 	current->setCentralPoint(modelMatrix[12],modelMatrix[13], modelMatrix[14]);
+	current->setGrowthDirection(modelMatrix[4], modelMatrix[5], modelMatrix[6]);
 
 	// In order to draw the last one:
 	if (isLastFromStage(current) && current->getStage() == 1) {
-		//glPushMatrix();
 		vsml->pushMatrix(VSMathLib::MODEL);
 		vsml->translate(0, current->getLength(), 0);
 		modelMatrix = vsml->get(VSMathLib::VIEW_MODEL);
@@ -290,25 +290,95 @@ int Tree::buildContralPoints(TreeNode * current){
 	return TREE_DONE;
 }
 
-int Tree::buildCirclePoints(TreeNode * current) {
-	// Draw the circle
-	/*glBegin(GL_TRIANGLE_STRIP);
-	for (float i = 0; i < 2 * 3.14; i += 0.5) {
-	//glColor3f(0.5, 0.5, 0.5);
-	glNormal3f(sin(i),0.0,cos(i));
-	glVertex3f(current->getWidth()*sin(i)s, current->getLength(), current->getWidth()*cos(i));
-	glNormal3f(sin(i), 0.0, cos(i));
-	glVertex3f(current->getWidth()*sin(i), 0, current->getWidth()*cos(i));
-	}
-	glNormal3f(sin(0), 0.0, cos(0));
-	glVertex3f(current->getWidth()*sin(0.0), current->getLength(), current->getWidth()*cos(0.0));
-	glNormal3f(sin(0), 0.0, cos(0));
-	glVertex3f(current->getWidth()*sin(0.0), 0, current->getWidth()*cos(0.0));
-	glEnd();*/
+static void MMult1x3By3x3(float a[3], float b[3][3], float res[3]) {
+	for (int i = 0; i < 3; i++) {
+		float sumAux = 0;
+		for (int j = 0; j < 3; j++) {
+			sumAux += a[j] * b[j][i];
 
-	//glPopMatrix();
-	//vsml->popMatrix(VSMathLib::VIEW);
+		}
+		res[i] = sumAux;
+	}
+}
+
+int Tree::buildCirclePoints(TreeNode * current) { // TODO: Check
+	// Draw the circle
+	const int slices = 10;
+	const int spaceBetweenPoints = (2 * PI) / slices;
+	vector<Point3> circlePoints;
+	vector<Point3> normalPoints;
+	float random[3] = { 0.0f, -1.0f, 0.0f }; 
+	float res[3];
+	Point3 normal;
+
+	// Get a perpendicular vector to the growing direction vector.
+	vsml->crossProduct(current->getGrowthDirection().toVec3f(), random, res);
+	vsml->normalize(res);
+	normal = Point3(res);
+	
+	// Some Variables for the rotation matrix
+	float cs = cos(spaceBetweenPoints);
+	float sn = sin(spaceBetweenPoints);
+	float u[3] = { current->getGrowthDirection().x, current->getGrowthDirection().y, current->getGrowthDirection().z };
+	float uu[3] = { u[0] * u[0] , u[1] * u[1] , u[2] * u[2] };
+	float R[3][3];
+
+	// Rotation Matrix
+	R[0][0] = cs + uu[0] * (1 - cs);
+	R[0][1] = u[0] * u[1] * (1 - cs) - u[2] * sn;
+	R[0][2] = u[0] * u[1] * (1 - cs) + u[1] * sn;
+
+	R[1][0] = u[1] * u[0] * (1 - cs) + u[2] * sn;
+	R[1][1] = cs + uu[1] * (1 - cs);
+	R[1][2] = u[1] * u[2] * (1 - cs) - u[0] * sn;
+
+	R[2][0] = u[2] * u[0] * (1 - cs) - u[1] * sn;
+	R[2][1] = u[2] * u[1] * (1 - cs) + u[0] * sn;
+	R[2][2] = cs + uu[2] * (1 - cs);
+	
+	for (float i = 0; i < slices; i += 1) {
+		//rotate normal by i * spaceBetweenPoints;
+		
+		normalPoints.push_back(normal);
+		circlePoints.push_back(current->getCentralPoint() + (normal * current->getWidth()));
+			
+		MMult1x3By3x3(normal.toVec3f(), R, res);
+		normal = Point3(res);
+			
+	}
+
 	return TREE_DONE;
+}
+
+int Tree::drawLeaves(TreeNode * current) {
+	float angle, length;
+	const float currentLength = current->getLength();
+	VSSurfRevLib vssrl;
+	// initialize random seed
+	srand(5);
+	if (current->getStage() >= 2) {
+		int nLeaves = rand() % 5 + 5;		
+		for (int i = 0; i < nLeaves; i++) {
+			
+			// generate number between 0 and 359:
+			angle = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / 360));
+			// generate number between 0 and 
+			length = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / currentLength));
+
+			vsml->pushMatrix(VSMathLib::MODEL);
+			vsml->translate(0, length,0);
+			vsml->rotate(angle, 0, 1, 0);
+			vsml->rotate(90, 1, 0, 0);
+			
+			
+			//vsml->scale(0.15, 0.15, 0.15);
+			vssrl.createCone(0.15,0.1,3);
+			vssrl.setColor(VSResourceLib::EMISSIVE, 0.85, 0.56, 0.01, 0);
+			vssrl.render();
+			vsml->popMatrix(VSMathLib::MODEL);
+		}
+	}
+	return TREE_NODE_DONE;
 }
 
 int Tree::buildpoints(TreeNode* node) {
@@ -325,7 +395,10 @@ int Tree::buildpoints(TreeNode* node) {
 			buildContralPoints(node);
 			buildCirclePoints(node);
 			vsml->translate(0, node->getLength(), 0);
-			drawIntersection(node);
+			//drawIntersection(node);
+
+			drawLeaves(node);
+
 		}
 		break;
 	case TREE_NODE_TYPE_TURN_RIGHT:
@@ -367,7 +440,7 @@ int Tree::buildpoints(TreeNode* node) {
 	return TREE_DONE;
 }
 
-
+float points[];
 
 int gatherPoints(TreeNode* current) {
 	list<TreeNode*>::iterator it;
@@ -392,15 +465,30 @@ int gatherPoints(TreeNode* current) {
 	return TREE_DONE;
 }
 
+int getBarkPoints() {
+	return TREE_DONE;
+}
+
+int drawBark() {
+	VSModelLib bark;
+	//bark.addMesh(, , , NULL, NULL, NULL, , );
+	return TREE_DONE;
+}
+
 int Tree::draw(){
 	VSCubicCurve cc;
 	currentPoints.clear();
 
 	int r= buildpoints(&start);
 
+	
+
 	//add imaginary first point;
 	currentPoints.push_back(Point3(0, -1, 0));
 	gatherPoints(&start);
+
+	drawBark();
+
 
 	vsml->loadIdentity(VSMathLib::MODEL);
 	vsml->loadIdentity(VSMathLib::VIEW);
@@ -409,9 +497,11 @@ int Tree::draw(){
 		cc.setType(VSCubicCurve::CATMULL_ROM);
 		cc.set(currentPoints, 8, false);
 		cc.setColor(VSResourceLib::EMISSIVE, 1, 0, 0, 1);
-		cc.render();
+		//cc.render();
 	}
 	else return TREE_NOT_ENOUGH_POINTS_FOR_CATMULLROM; 
+
+	
 
 	//if(currentPoints.size() > 0) printf("Last Point is: %f %f %f\n", currentPoints.back()->x, currentPoints.back()->y, currentPoints.back()->z);
 
