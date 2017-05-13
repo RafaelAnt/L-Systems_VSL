@@ -25,19 +25,20 @@ Tree::Tree(string axiom, list<ProductionRule> prods,float maxLength, float maxWi
 	this->angle = angle;
 	TreeNode *aux;
 	this->vsml = VSMathLib::getInstance();
+	//this->leaf = VSSurfRevLib();
 
 	char ch = axiom.at(0);
 	start = TreeNode(ch, nullptr);
 
 	TreeNode *last = &start;
-	//printf("char do start:     \'%c\'\n", start.getType());
 	for (unsigned int j = 1; j < axiom.length(); j++) {
 		ch = axiom.at(j);
 		aux = new TreeNode (ch, last);
-		//printf("char do Tree node:     \'%c\'\n", aux.getType());
 		last->addNode(aux);
 		last = aux;
 	}
+
+
 
 }
 
@@ -176,9 +177,7 @@ int Tree::drawIntersection(TreeNode * node){
 /// </summary>
 /// <param name="node">The Tree Node to be rotated.</param>
 void Tree::rotL(TreeNode* node) {
-	//vsml->rotate(node->getDegree(), 1, 0, 0);
 	vsml->rotate(node->getDegree(), 0, 1, 0);
-	//vsml->rotate(node->getDegree(), 0, 0, 1);
 }
 
 /// <summary>
@@ -186,9 +185,7 @@ void Tree::rotL(TreeNode* node) {
 /// </summary>
 /// <param name="node">The Tree Node to be rotated.</param>
 void Tree::rotR(TreeNode* node) {
-	//vsml->rotate(-node->getDegree(), 1, 0, 0);
 	vsml->rotate(-node->getDegree(), 0, 1, 0);
-	//vsml->rotate(-node->getDegree(), 0, 0, 1);
 }
 
 /// <summary>
@@ -197,8 +194,6 @@ void Tree::rotR(TreeNode* node) {
 /// <param name="node">The Tree Node to be rotated.</param>
 void Tree::switchL(TreeNode* node) {
 	vsml->rotate(node->getDegree(), 1, 0, 0);
-	//vsml->rotate(node->getDegree(), 0, 1, 0);
-	//vsml->rotate(node->getDegree(), 0, 0, 1);
 }
 
 /// <summary>
@@ -207,8 +202,6 @@ void Tree::switchL(TreeNode* node) {
 /// <param name="node">The Tree Node to be rotated.</param>
 void Tree::switchR(TreeNode* node) {
 	vsml->rotate(-node->getDegree(), 1, 0, 0);
-	//vsml->rotate(-node->getDegree(), 0, 1, 0);
-	//vsml->rotate(-node->getDegree(), 0, 0, 1);
 }
 
 
@@ -353,7 +346,7 @@ int Tree::buildCirclePoints(TreeNode * current) { // TODO: Check
 int Tree::drawLeaves(TreeNode * current) {
 	float angle, length;
 	const float currentLength = current->getLength();
-	VSSurfRevLib vssrl;
+	
 	// initialize random seed
 	srand(5);
 	if (current->getStage() >= 2) {
@@ -370,11 +363,7 @@ int Tree::drawLeaves(TreeNode * current) {
 			vsml->rotate(angle, 0, 1, 0);
 			vsml->rotate(90, 1, 0, 0);
 			
-			
-			//vsml->scale(0.15, 0.15, 0.15);
-			vssrl.createCone(0.15,0.1,3);
-			vssrl.setColor(VSResourceLib::EMISSIVE, 0.85, 0.56, 0.01, 0);
-			vssrl.render();
+			//this->leaf.render();
 			vsml->popMatrix(VSMathLib::MODEL);
 		}
 	}
@@ -478,6 +467,9 @@ int drawBark() {
 int Tree::draw(){
 	VSCubicCurve cc;
 	currentPoints.clear();
+
+	this->leaf.createCone(0.15, 0.1, 3);
+	this->leaf.setColor(VSResourceLib::EMISSIVE, 0.85, 0.56, 0.01, 0);
 
 	int r= buildpoints(&start);
 

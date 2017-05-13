@@ -1,7 +1,3 @@
-﻿  vsGeometryLib.cpp
-C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\source\vsGeometryLib.cpp(664): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\source\vsGeometryLib.cpp(698): warning C4018: '<': signed/unsigned mismatch
-  vsModelLib.cpp
+﻿  vsModelLib.cpp
 C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\VSL\source\vsModelLib.cpp(866): warning C4018: '>=': signed/unsigned mismatch
-  Generating Code...
   vsl.vcxproj -> C:\Users\Rafael\Documents\GitHub\L-Systems_VSL\build\VSL\Debug\vsld.lib

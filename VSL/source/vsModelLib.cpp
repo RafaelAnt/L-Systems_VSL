@@ -842,9 +842,9 @@ VSModelLib::addCubeMapTexture(unsigned int unit, std::string posX, std::string n
 /// <param name="p">The points.</param>
 /// <param name="n">The normals.</param>
 /// <param name="tc">The tc.</param>
-/// <param name="tang">The tang.</param>
-/// <param name="bitan">The bitan.</param>
-/// <param name="numInd">The number ind.</param>
+/// <param name="tang">The tangent.</param>
+/// <param name="bitan">The bi-tangent.</param>
+/// <param name="numInd">The number of indices.</param>
 /// <param name="indices">The indices.</param>
 /// <returns>the number of the new mesh.</returns>
 int

@@ -64,6 +64,8 @@ public:
 
 private:
 	
+	VSSurfRevLib leaf;
+
 	void rotL(TreeNode* node);
 	void rotR(TreeNode* node);
 	void switchL(TreeNode* node);
