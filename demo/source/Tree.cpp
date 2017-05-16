@@ -382,7 +382,7 @@ int Tree::buildpoints(TreeNode* node) {
 			vsml->translate(0, node->getLength(), 0);
 			//drawIntersection(node);
 
-			//drawLeaves(node);
+			drawLeaves(node);
 
 		}
 		break;
@@ -463,6 +463,8 @@ int drawBark() {
 int Tree::draw(){
 	VSCubicCurve cc;
 	currentPoints.clear();
+
+	pp.setColor(VSResourceLib::EMISSIVE, 0, 1, 0, 1);
 
 	int r= buildpoints(&start);
 
@@ -555,8 +557,34 @@ int Tree::reset() {
 	return TREE_DONE;
 }
 
+int numberOfNodesFromStage(TreeNode * current) {
+	assert("Current TreeNode is NULL" && current != NULL);
+	int r = 1;
+	list<TreeNode*> nodes;
+	list<TreeNode*>::iterator it;
+	TreeNode* aux;
+
+	nodes = current->getNodes();
+	if (nodes.size() == 0) return 0;
+
+	for (it = nodes.begin(); it != nodes.end(); it++) {
+		aux = *it;
+		if (aux->getStage() == current->getStage()) {
+			if (aux->getType() == TREE_NODE_TYPE_BRANCH) {
+				r++;
+			}
+			r += numberOfNodesFromStage(aux);
+		}
+		
+	}
+
+	return r;
+}
+
 int Tree::setDevelopment(int percent){
 	if (percent < 0 || percent>100) return TREE_INVALID_VALUE;
+	
+	numberOfNodesFromStage(&start);
 	return TREE_DONE;
 }
 
@@ -567,6 +595,6 @@ int Tree::drawStaticTree(){
 int Tree::init(){
 	this->leaf.createCone(0.15, 0.1, 3);
 	this->leaf.setColor(VSResourceLib::EMISSIVE, 0.85, 0.56, 0.01, 0);
-	pp.setColor(VSResourceLib::EMISSIVE, 0, 1, 0, 1);
+	
 	return TREE_DONE;
 }
