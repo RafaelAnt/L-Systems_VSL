@@ -23,10 +23,15 @@
 
 #define PI 3.1415
 #define EXPANSIONS_NUMBER 3
+#define GROUND_RADIUS 3.0f
 // INITIAL -> For the initial rotation system, with only 1 angle. - UNAVAILABLE
 // SPHERIC -> For the new rotation systems, using spheric coordinates.
-#define ROTATION_SYSTEM SPHERIC // Unused...
-#define GROUND_RADIUS 3.0f
+#define ROTATION_SYSTEM_SPHERIC 999
+#define ROTATION_SYSTEM_INITIAL 998// Unused...
+// FIXED -> Fixed growth, performance friendly.
+// ANIMATED -> Animated growth.
+#define PLANT_GROWTH_ANIMATED 997
+#define PLANT_GROWTH_FIXED 996
 
 
 
@@ -67,8 +72,6 @@ float r = 5.0f;
 int startX, startY, tracking = 0;
 
 
-
-
 //// Frame counting and FPS computation
 long myTime, timebase = 0, frame = 0;
 char s[32];
@@ -81,6 +84,8 @@ float degree = 0;
 double lastTime = 0, elapsedTime = 0, lastElapsedTime = 0;
 string expanded;
 Tree plant;
+int rotationSystem = ROTATION_SYSTEM_SPHERIC;
+int growthMode = PLANT_GROWTH_ANIMATED;
 
 
 // ------------------------------------------------------------
@@ -140,13 +145,13 @@ void renderScene(void) {
 			// start counting primitives
 			glBeginQuery(GL_PRIMITIVES_GENERATED, counterQ);
 			// render array of models
-			
+
 			vsml->pushMatrix(VSMathLib::MODEL);
 			vsml->scale(GROUND_RADIUS, GROUND_RADIUS, GROUND_RADIUS);
 			vsml->translate(VSMathLib::MODEL, 0.0f, -0.65f, 0.0f);
 			vaseModel.render();
 			vsml->popMatrix(VSMathLib::MODEL);
-		
+
 			//axis.render();
 			//gridY.render();
 
@@ -154,10 +159,19 @@ void renderScene(void) {
 
 			// Tree
 			int result;
-			result = plant.draw();
-			if (result != TREE_DONE && result != TREE_NOT_ENOUGH_POINTS_FOR_CATMULLROM) {
-				std::printf("Fatal Error: %d\n", result);
-				exit(0);
+			if (growthMode == PLANT_GROWTH_ANIMATED) {
+				result = plant.draw();
+				if (result != TREE_DONE && result != TREE_NOT_ENOUGH_POINTS_FOR_CATMULLROM) {
+					std::printf("Fatal Error: %d\n", result);
+					exit(0);
+				}
+			}
+			else {
+				result = plant.drawStaticTree();
+				if (result != TREE_DONE) {
+					std::printf("Fatal Error: %d\n", result);
+					exit(0);
+				}
 			}
 
 			// stop counting primitives
@@ -212,16 +226,18 @@ void renderScene(void) {
 //
 
 void animate() {
+	if (growthMode == PLANT_GROWTH_ANIMATED) {
+		if (lastTime == 0) lastTime = timeGetTime();
+		elapsedTime = timeGetTime() - lastTime;
 
-	if (lastTime == 0) lastTime = timeGetTime();
-	elapsedTime = timeGetTime() - lastTime;
+		int r = plant.animate(elapsedTime);
 
-	int r = plant.animate(elapsedTime);
-
-	if (r != TREE_DONE && r != TREE_NOT_ENOUGH_POINTS_FOR_CATMULLROM) {
-		std::printf("Fatal Error: %d\n", r);
-		exit(0);
+		if (r != TREE_DONE && r != TREE_NOT_ENOUGH_POINTS_FOR_CATMULLROM) {
+			std::printf("Fatal Error: %d\n", r);
+			exit(0);
+		}
 	}
+	
 
 	glutPostRedisplay();
 
@@ -579,7 +595,8 @@ void glutMain(int argc, char** argv) {
 		exit(1);
 	}
 
-
+	// Initialize some tree variables.
+	plant.init();
 	//  GLUT main loop
 	glutMainLoop();
 }
@@ -651,9 +668,14 @@ int main(int argc, char **argv) {
 	if (r != TREE_DONE) {
 		printf("ERROR GROWING !!\n");
 	}
+	if (growthMode == PLANT_GROWTH_FIXED) {
+		r = plant.setDevelopment(50);
+		if (r != TREE_DONE) printf("ERROR SETTING DEVELOPMENT.\n");
+	}
+	
 
-	string aux = plant.getLSystem();
-	printf("\nLSystem: \"%s\"\n", aux.data());
+	//string aux = plant.getLSystem();
+	//printf("\nLSystem: \"%s\"\n", aux.data());
 
 
 	glutMain(argc, argv);

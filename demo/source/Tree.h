@@ -60,11 +60,15 @@ public:
 	string getLSystem();
 	int animate(double time);
 	int reset();
-
+	int setDevelopment(int percent);
+	int drawStaticTree();
+	int init();
 
 private:
 	
 	VSSurfRevLib leaf;
+	VSModelLib tree;
+	VSPolyLine pp;
 
 	void rotL(TreeNode* node);
 	void rotR(TreeNode* node);

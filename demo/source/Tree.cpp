@@ -37,9 +37,6 @@ Tree::Tree(string axiom, list<ProductionRule> prods,float maxLength, float maxWi
 		last->addNode(aux);
 		last = aux;
 	}
-
-
-
 }
 
 TreeNode Tree::getStart(){
@@ -116,13 +113,12 @@ int Tree::grow(int number){
 
 int Tree::drawLine(TreeNode * node) {
 	assert("TreeNode Is Null" && node != NULL);
-	VSPolyLine pp;
+	
 	vector<Point3> points={
 		Point3(0,0,0),
 		Point3(0,node->getLength(),0)
 	};
 	pp.set(points);
-	pp.setColor(VSResourceLib::EMISSIVE, 0, 1, 0, 1);
 	pp.render();
 
 	return TREE_DONE;
@@ -363,7 +359,7 @@ int Tree::drawLeaves(TreeNode * current) {
 			vsml->rotate(angle, 0, 1, 0);
 			vsml->rotate(90, 1, 0, 0);
 			
-			//this->leaf.render();
+			this->leaf.render();
 			vsml->popMatrix(VSMathLib::MODEL);
 		}
 	}
@@ -386,7 +382,7 @@ int Tree::buildpoints(TreeNode* node) {
 			vsml->translate(0, node->getLength(), 0);
 			//drawIntersection(node);
 
-			drawLeaves(node);
+			//drawLeaves(node);
 
 		}
 		break;
@@ -468,12 +464,7 @@ int Tree::draw(){
 	VSCubicCurve cc;
 	currentPoints.clear();
 
-	this->leaf.createCone(0.15, 0.1, 3);
-	this->leaf.setColor(VSResourceLib::EMISSIVE, 0.85, 0.56, 0.01, 0);
-
 	int r= buildpoints(&start);
-
-	
 
 	//add imaginary first point;
 	currentPoints.push_back(Point3(0, -1, 0));
@@ -561,5 +552,21 @@ int Tree::reset() {
 		}
 	}
 
+	return TREE_DONE;
+}
+
+int Tree::setDevelopment(int percent){
+	if (percent < 0 || percent>100) return TREE_INVALID_VALUE;
+	return TREE_DONE;
+}
+
+int Tree::drawStaticTree(){
+	return TREE_DONE;
+}
+
+int Tree::init(){
+	this->leaf.createCone(0.15, 0.1, 3);
+	this->leaf.setColor(VSResourceLib::EMISSIVE, 0.85, 0.56, 0.01, 0);
+	pp.setColor(VSResourceLib::EMISSIVE, 0, 1, 0, 1);
 	return TREE_DONE;
 }
