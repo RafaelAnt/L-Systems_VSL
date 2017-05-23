@@ -382,7 +382,7 @@ int Tree::buildpoints(TreeNode* node) {
 			vsml->translate(0, node->getLength(), 0);
 			//drawIntersection(node);
 
-			drawLeaves(node);
+			//drawLeaves(node);
 
 		}
 		break;

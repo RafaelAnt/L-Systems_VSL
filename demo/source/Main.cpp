@@ -20,6 +20,8 @@
 #include "Tree.h"
 #include "config.h"
 
+// Use Visual Leak Detector
+//#include "vld.h"
 
 #define PI 3.1415
 #define EXPANSIONS_NUMBER 3
